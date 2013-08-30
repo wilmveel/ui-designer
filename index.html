@@ -28,7 +28,7 @@
 	<script type="text/javascript" src="angular/angularFormApp.js"></script>
 	
 	<script type="text/javascript" src="angular/elementController.js"></script>
-	<script type="text/javascript" src="angular/studioController.js"></script>
+	<script type="text/javascript" src="angular/designerController.js"></script>
 	<script type="text/javascript" src="angular/editController.js"></script>
 	
 	<script type="text/javascript" src="angular/elementService.js"></script>
@@ -46,7 +46,7 @@
 	</head>
 	<body  ng-cloak>
 
-	  <div class="container" ng-controller="studioCtrl" >
+	  <div class="container" ng-controller="designerCtrl" >
 
 		<nav class="navbar navbar-default" role="navigation">
 		  <!-- Brand and toggle get grouped for better mobile display -->
@@ -57,40 +57,40 @@
 			  <span class="icon-bar"></span>
 			  <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><b>Angular</b> Ui Studio</a>
-			
-			 <ul class="nav navbar-nav navbar-right">
-			  <li><a href="#">Remove Item</a></li>
-			</ul>
-		  
+			<a class="navbar-brand" href="#"><b>Angular</b> Ui Studio</a>		  
 		  </div>
 		  
-		  <div class="collapse navbar-collapse navbar-ex1-collapse">
-
-		  </div>
+		  <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span> Refresh</a></li>
+            <li><a href="#" ng-click="deselect()"><span class="glyphicon glyphicon-unchecked"></span> Deselect</a></li>
+          </ul>
 		</nav>
 		
 			<div class="row">
 			
 				<!-- New and Edit elements -->
 				<div class="col-lg-3">
-			
-
 					<div class="panel panel-default">
-					  <div class="panel-heading">Grid System</div>
+					  <div class="panel-heading">New element</div>
 						  <div class="panel-body">					  
-							<ul>
-								<li ng-repeat="template in templates" >
-									<div element-new value="template" class="btn btn-info"  >{{name}}</div>
-								</li>
-							</ul>
+							
+							<div>
+							Grid: 
+							<span ng-repeat="template in templates | filter:{ group: 'grid' }" element-new value="template"  class="label label-default">{{name}} </span>
+							</div>
+							
+							<div>
+							Form: 
+							<span ng-repeat="template in templates | filter:{ group: 'form' }" element-new value="template"  class="label label-default">{{name}} </span>
+							</div>
+							
 						</div>
 					</div>
 					
 					<div class="panel panel-default">
 					  <div class="panel-heading">Edit element</div>
 						  <div class="panel-body" style='height:100px;' element-edit >					
-							Drop in element.
+							Drop in element to edit
 						</div>
 					</div>  					 
 				</div>
@@ -202,6 +202,7 @@
 				</div>
 				<div class="modal-footer">
 				  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				  <button type="button" class="btn btn-primary" ng-click="remove()">Remove</button>
 				  <button type="button" class="btn btn-primary" ng-click="save()">Save changes</button>
 				</div>
 			  </div><!-- /.modal-content -->

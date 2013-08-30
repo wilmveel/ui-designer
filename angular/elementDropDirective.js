@@ -11,9 +11,11 @@ app.directive('elementDrop', function ($compile, $http, elementService) {
 			//make dropable when selected
 			if(newValue){
 				if(scope.selected){
-					scope.drop.droppable({
+					iElement.droppable({
+						disabled: false,
 						drop:function(event,ui) {
 							
+							// Set drop element
 							elementService.dropElement = scope.value;
 							
 							var dragElement = elementService.dragElement;
@@ -27,10 +29,11 @@ app.directive('elementDrop', function ($compile, $http, elementService) {
 							}else{
 								scope.addElement(dragElement, dropElement);
 							}
+							
 							angular.element(this).removeClass("drop-active");
 							
-							
-							
+							scope.$emit("drop", dragElement, dropElement);
+
 							scope.$apply();
 						},
 						
@@ -52,7 +55,7 @@ app.directive('elementDrop', function ($compile, $http, elementService) {
 			// Remove dropable when not selected
 			if(oldValue){
 				console.log("Disable drop", scope.drop);
-				scope.drop.droppable('destroy');
+				iElement.droppable('disable');
 			}
 		});
 	}}

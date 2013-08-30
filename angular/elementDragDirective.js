@@ -11,12 +11,14 @@ app.directive('elementDrag', function ($compile, $http, elementService) {
 			// make dragable when selected
 			if(newValue){
 				if(scope.selected){
-					scope.drag.draggable({
+					iElement.draggable({
 						revert:true,
+						disabled: false,
 						start:function(event,ui) {
 							console.log("Start draging", scope.value); 
 							angular.element(this).addClass("drag-active");
 							elementService.dragElement = scope.value;
+							elementService.dragScope = scope;
 						},
 						stop:function(event,ui) {
 							console.log("Stop draging", scope.value); 
@@ -28,7 +30,7 @@ app.directive('elementDrag', function ($compile, $http, elementService) {
 			
 			// delete drageble when not selected
 			if(oldValue){
-				scope.drag.draggable('destroy');	
+				iElement.draggable('disable');	
 			}
 		});
 	  }

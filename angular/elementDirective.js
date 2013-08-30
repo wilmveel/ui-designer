@@ -11,20 +11,23 @@ app.directive('element', function ($compile, $http, elementService) {
 			console.log("Init element", scope.value);
 			
 			//Set some attributes of the value. should be latere replaced by loop
-			scope.name = scope.value.name; 
-			scope.columns = scope.value.columns; 
-			scope.id = scope.value.id; 
-			scope.text = scope.value.text; 
-			scope.label = scope.value.label; 
-			scope.title = scope.value.title; 
-			scope.template = scope.value.template;
+			scope.reload = function(){
+				scope.name = scope.value.name; 
+				scope.columns = scope.value.columns; 
+				scope.id = scope.value.id; 
+				scope.text = scope.value.text; 
+				scope.label = scope.value.label; 
+				scope.title = scope.value.title; 
+				scope.template = scope.value.template;
+			}
+			scope.reload();
 			
 			//deselect elements by broadcasting
 			scope.$on("deselect", function(){
 				console.log("deselect", scope.value);
 				scope.selected = false;
 			});
-			
+						
 			// get the template and add html tages to enable drag and drop
 			$http.get('element/' + scope.value.template + '.html').success(function(html){
 				
@@ -64,10 +67,6 @@ app.directive('element', function ($compile, $http, elementService) {
 				// Add and compile elements
 				iElement.html(drag);
 				$compile(iElement.contents())(scope); 
-				
-				//Add drag and drop element to the scope
-				scope.drag = drag;
-				scope.drop = drop;
 				
 			});
 

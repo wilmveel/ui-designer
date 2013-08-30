@@ -95,6 +95,12 @@ app.service('elementService', function($http, $q) {
 		console.log("AddElm", elm1, felm.data[felm.i]);
 	}
 	
+	this.replaceElement = function(elm) {
+		var found = this.findElement(this.elements, elm);
+		found.data[found.i] = elm;
+		console.log("replaceElement", elm, found.data[found.i]);
+	}
+	
 	this.findElement = function(data, elm) {
         for (var i in data) {
             console.log(data[i]);
