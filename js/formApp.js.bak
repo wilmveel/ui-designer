@@ -1,0 +1,173 @@
+var app = angular.module('formApp', ['ui.bootstrap', 'ngDragDrop']);
+
+app.controller('FormCtrl', function($scope, $rootScope) {
+	
+	$rootScope.elements = [
+		{
+			"name":"Row",
+			"template":"<div class='row'></div>{{name}}</div>",
+			"elements" : [
+				{
+					"name" : "Column",
+					"columns" : 5,
+					"template":"<div class='col-md-{{columns}}'>{{name}}34</div>"
+				},
+				{
+					"name" : "Column",
+					"template":"<div class='col-md-1'>56</div>"
+				}
+			]
+		},
+		{
+			"name":"test4",
+			"template":"<div style='border:solid 1px #333;padding:5px;margin:5px;'>7</div>8</div>"
+		}
+	];
+	
+	
+	
+	$scope.setColumns = function(){
+				
+		var json = {
+					"name" : "test1.1",
+					"columns" : 5,
+					"template":"<div class='col-md-{{columns}}'>{{content}}1{{name}}</div>"
+				}
+		
+		$scope.elements[0].elements.push(json);
+		
+		$scope.elements[0].elements[0].name = "Hallo"
+		$scope.elements[0].elements[2].name = "Hallo"
+		
+	}	
+});
+
+app.controller('DragDropCtrl', function($scope, $rootScope) {
+	
+	$scope.elementRow = {"name":"Row", "template":"<div style='border:solid 1px #333;padding:5px;margin:5px;' class='row'>{{content}}</div>"};
+	$scope.elementCol = {"name" : "Column", "columns" : 5, "template":"<div style='border:solid 1px #333;padding:5px;margin:5px;' class='col-md-{{columns}}'>{{content}}1{{name}}</div>"};
+	
+	$scope.elementEmpty = {};
+	
+	$scope.startCallback = function(event, ui) {
+	console.log('You started draggin');
+	};
+
+	$scope.stopCallback = function(event, ui) {
+	console.log('Why did you stop draggin me?');
+
+	};
+
+	$scope.dragCallback = function(event, ui) {
+	console.log('hey, look I`m flying');
+
+	};
+
+	$scope.dropCallback = function(event, ui) {
+	console.log('hey, you dumped me :-(');
+		console.log(event);
+	console.log(ui);
+				$rootScope.elements.push({
+				"name" : event.type,
+				"columns" : 2 ,
+				"template":"<div style='border:solid 1px #333;padding:5px;margin:5px;' class='col-md-{{columns}}'>{{content}}{{name}}</div>"
+			});
+	};
+
+	$scope.overCallback = function(event, ui) {
+	console.log('Look, I`m over you');		
+	};
+
+	$scope.outCallback = function(event, ui) {
+	console.log('I`m not, hehe');
+	};
+
+	
+});
+
+app.directive('formElement', function ($compile) {
+    return {
+        restrict: 'E',
+        scope: { val: '=' },
+		controller:"DragDropCtrl",
+		transclusion: true,
+		//replace: true,
+		
+		template: function(){
+			var template = "";
+			template += "<div class='thumbnail' data-drop='true' data-jqyoui-options=\"{revert: 'invalid'}\" ng-model='val' jqyoui-droppable=\"{onDrop:'dropCallback',onOver: 'overCallback', onOut: 'outCallback'}\">";
+			template += "<div data-drag='true' data-jqyoui-options=\"{revert: 'invalid'}\" ng-model='val' jqyoui-draggable=\"{placeholder:true,animate:true, onStart:'startCallback', onStop: 'stopCallback', onDrag: 'dragCallback'}\">"
+			//template += template;
+			
+			
+			//template = template.replace("{{content}}", "<div ng-transclude></div>");
+			
+			 if(angular.isArray()){
+				template += "<div ng-repeat='elm in val.elements'>"
+				template += "<form-element val='elm'></form-render>"
+				template += "</div>";
+				
+			}
+			
+			template += "<div ng-transclude></div>";
+			
+			template += "</div>";
+			template += "</div>";
+			
+			return template;
+		},
+		link: function(scope, element, attrs) {
+			
+			scope.test = "test variable";
+			scope.name = scope.val.name;
+			scope.columns = scope.val.columns;
+			
+			
+		}
+        
+    }
+});
+
+app.directive('formJson', function ($compile) {
+    return {
+        restrict: 'E',
+        scope: { val: '=' },
+		link: function(scope, element, attrs) {
+			
+			scope.test = "test variable";
+			
+			var template = "<div><pre>" + syntaxHighlight(scope.val) + "</pre></div>";
+			
+			 if(angular.isArray(scope.val.elements)){
+				template += "<div ng-repeat='elm in val.elements' ><form-json val='elm'></form-render></div>";
+			}
+            
+            var newElement = angular.element(template);
+            $compile(newElement)(scope);
+            element.append(newElement);
+		}
+        
+    }
+});
+
+function syntaxHighlight(json) {
+    if (typeof json != 'string') {
+         json = JSON.stringify(json, undefined, 2);
+    }
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
+}

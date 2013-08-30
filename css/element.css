@@ -1,0 +1,51 @@
+.drag {
+	cursor: move;
+	position:relative;
+	z-index:10;
+	
+}
+
+.border {
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	border: dashed 2px #EEE;
+}
+
+.drag-active .border {
+	
+}
+		
+.plop{
+	position:absolute;
+	top:5px;
+	right:5px;
+	height:20px;
+}
+
+.drop {
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+}
+
+.drop-active {
+	background:#EEE;
+}
+
+.please {
+	height:50px;
+	background:#EEE;
+	border: dashed 2px #999;
+	margin:30px;
+	text-align:center;
+	line-height:50px;
+}
+
+.drop-active .append{
+	display:block;
+}

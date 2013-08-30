@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="App">
+<head>
+
+	<meta name="description" content="AngularJS + jQuery UI Drag-n-Drop" />
+
+	<meta charset=utf-8 />
+	<title>Angular Ui Studio</title>
+	<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+
+	 <!--[if lte IE 8]>
+		<script src="js/json2.js"></script>
+	<![endif]-->
+  
+	<script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="js/ui-bootstrap-0.5.0.js"></script>
+	<script type="text/javascript" src="js/ui-bootstrap-tpls-0.5.0.js"></script>
+	
+	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+	
+	<!-- application -->
+	<script type="text/javascript" src="angular/angularFormApp.js"></script>
+	
+	<script type="text/javascript" src="angular/elementController.js"></script>
+	<script type="text/javascript" src="angular/studioController.js"></script>
+	<script type="text/javascript" src="angular/editController.js"></script>
+	
+	<script type="text/javascript" src="angular/elementService.js"></script>
+	
+	<script type="text/javascript" src="angular/elementDirective.js"></script>
+	<script type="text/javascript" src="angular/elementDragDirective.js"></script>
+	<script type="text/javascript" src="angular/elementNewDirective.js"></script>
+	<script type="text/javascript" src="angular/elementEditDirective.js"></script>
+	<script type="text/javascript" src="angular/elementDropDirective.js"></script>
+	<script type="text/javascript" src="angular/elementIncludeDirective.js"></script>
+	<script type="text/javascript" src="angular/elementJsonDirective.js"></script>
+	
+	<link href="css/element.css" rel="stylesheet" media="screen">
+
+	</head>
+	<body  ng-cloak>
+
+	  <div class="container" ng-controller="studioCtrl" >
+
+		<nav class="navbar navbar-default" role="navigation">
+		  <!-- Brand and toggle get grouped for better mobile display -->
+		  <div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			  <span class="sr-only">Toggle navigation generator</span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			  <span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><b>Angular</b> Ui Studio</a>
+			
+			 <ul class="nav navbar-nav navbar-right">
+			  <li><a href="#">Remove Item</a></li>
+			</ul>
+		  
+		  </div>
+		  
+		  <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+		  </div>
+		</nav>
+		
+			<div class="row">
+			
+				<!-- New and Edit elements -->
+				<div class="col-lg-3">
+			
+
+					<div class="panel panel-default">
+					  <div class="panel-heading">Grid System</div>
+						  <div class="panel-body">					  
+							<ul>
+								<li ng-repeat="template in templates" >
+									<div element-new value="template" class="btn btn-info"  >{{name}}</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="panel panel-default">
+					  <div class="panel-heading">Edit element</div>
+						  <div class="panel-body" style='height:100px;' element-edit >					
+							Drop in element.
+						</div>
+					</div>  					 
+				</div>
+
+				
+				<!-- Designer -->
+				<div class="col-lg-9" >
+					<tabset>
+						<tab heading="Design">
+							
+							
+							<div class="editor" >
+						
+								<element value="element" ng-repeat="element in getElements()" />
+								
+							</div>
+						</tab>
+						<tab heading="Json">
+							<div >
+								<form-json val="getElements()" />
+							</div>
+						</tab>
+					</tabset>
+				</div>
+		
+		  </div>
+
+	  
+	  <div ng-controller="EditCtrl">
+		  <!-- Modal -->
+		  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				  <h4 class="modal-title">Edit element</h4>
+				</div>
+				<div class="modal-body">
+				
+					
+					<div class="panel panel-default">
+					  <div class="panel-body">
+
+					  <!-- Input for label -->
+						<div class="form-group" ng-show="element.label">
+							<label for="elementLabel">Label</label>
+							<input id="elementLabel" type="text" class="form-control" placeholder="Label" ng-model="element.label">
+						</div>
+						
+						<!-- Input for title -->
+						<div class="form-group" ng-show="element.title">
+							<label for="elementLabel">Label</label>
+							<input id="elementLabel" type="text" class="form-control" placeholder="Label" ng-model="element.title">
+						</div>
+						
+						<!-- Input for icon -->
+						<div class="form-group" ng-show="element.icon">
+							<label for="elementText">Icon</label>
+							<div class="input-group">
+								<input type="text" class="form-control" ng-model="element.icon" readonly>
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+									<ul class="dropdown-menu pull-right">
+										<li ng-repeat="icon in icons"><a href="#" ng-click="setIcon(icon)" >{{icon}}</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Input for text -->
+						<div class="form-group" ng-show="element.text">
+							<label for="elementText">Text</label>
+							<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.text">
+						</div>
+						
+						<!-- Input for ng-model -->
+						<div class="form-group" ng-show="element.ngmodel">
+							<label for="elementText">ng-model</label>
+							<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.ngmodel">
+						</div>
+						
+						<!-- Input for columns -->
+						<div class="form-group" ng-show="element.columns">
+							<label for="elementText">Columns</label>
+							<div class="input-group">
+								<input type="text" class="form-control" ng-model="element.columns" >
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+									<ul class="dropdown-menu pull-right">
+										<li><a href="#" ng-click="element.columns = 1" >1</a></li>
+										<li><a href="#" ng-click="element.columns = 2" >2</a></li>
+										<li><a href="#" ng-click="element.columns = 3" >3</a></li>
+										<li><a href="#" ng-click="element.columns = 4" >4</a></li>
+										<li><a href="#" ng-click="element.columns = 5" >5</a></li>
+										<li><a href="#" ng-click="element.columns = 6" >6</a></li>
+										<li><a href="#" ng-click="element.columns = 7" >7</a></li>
+										<li><a href="#" ng-click="element.columns = 8" >8</a></li>
+										<li><a href="#" ng-click="element.columns = 9" >9</a></li>
+										<li><a href="#" ng-click="element.columns = 10" >10</a></li>
+										<li><a href="#" ng-click="element.columns = 11" >11</a></li>
+										<li><a href="#" ng-click="element.columns = 12" >12</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				  </div>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				  <button type="button" class="btn btn-primary" ng-click="save()">Save changes</button>
+				</div>
+			  </div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		  </div><!-- /.modal -->
+		</div>
+		  </div>
+	</body>
+</html>
