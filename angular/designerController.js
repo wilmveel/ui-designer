@@ -1,11 +1,30 @@
 app.controller('designerCtrl', function($scope, $rootScope, elementService) {
      
+	$scope.selected = true;
+	 
 	//get all elements from the service
 	$scope.getElements = function (){
 		return elementService.elements;
 	}
 	
-   $scope.templates = [
+	$scope.groups;
+	$scope.getGroups = function (){
+		if(!$scope.groups){
+			$scope.groups = new Array();
+			angular.forEach($scope.templates, function(value, key){
+				if($scope.groups.indexOf(value.group) < 0 && value.group){
+					$scope.groups.push(value.group);
+				}
+				console.log("Groups", value.group);
+			});
+			console.log("Groups", $scope.groups);
+		}
+		return $scope.groups;
+	}
+	
+	$scope.groups;
+	
+	$scope.templates = [
 		{
 			"group" : "grid",
 			"name" : "Row",
@@ -32,7 +51,14 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 			"group" : "form",
 			"name" : "Button",
 			"template":"button",
-			"label":"Button"
+			"label":"Button",
+			"color":"default"
+		},
+		{
+			"group" : "form",
+			"template":"button_group",
+			"label":"Button",
+			"size":""
 		},
 		{
 			"name" : "Panel",
@@ -50,6 +76,7 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 		},
 
 	];
+
 	
 	$scope.element = new Object();
    
@@ -105,16 +132,12 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 
 	$scope.save = function(){	
 		console.log("Save", $scope.element);
-		console.log("Save", elementService.dragScope);
+		//elementService.replaceElement($scope.element);
+		elementService.dragScope.reload();
 		$("#myModal").modal('hide');
 	}
 	
 	$scope.edit = function(element){	
-		$scope.element = element;
-		$("#myModal").modal('show');
-	}
-	
-	$scope.add = function(element){	
 		$scope.element = element;
 		$("#myModal").modal('show');
 	}
@@ -124,11 +147,13 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 		$("#myModal").modal('hide');
 	}
 	
-		//deselect elements by broadcasting
-	$scope.$on("drop", function(event, dragElement, dropElement){
-		console.log("Drop element", $scope);
-		console.log("event", event);
-		console.log("dragElement", dragElement);
-		console.log("dropElement", dropElement);
+	// Open model for edit after drop element
+	$scope.$on("element-add", function(event, dragElement, dropElement){
+		$scope.edit(dragElement);
+	});
+	
+	// Open model for edit after drop element
+	$scope.$on("element-edit", function(event, dragElement, dropElement){
+		$scope.edit(dragElement);
 	});
 });

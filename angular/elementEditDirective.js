@@ -18,6 +18,8 @@ app.directive('elementEdit', function ($compile, $http, elementService) {
 
 					iElement.removeClass("drop-active");
 
+					scope.$emit("element-edit", dragElement);
+					
 					scope.$apply();
 				},
 				

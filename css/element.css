@@ -23,6 +23,7 @@
 	top:5px;
 	right:5px;
 	height:20px;
+	font-size:8px;
 }
 
 .drop {
@@ -41,7 +42,7 @@
 	height:50px;
 	background:#EEE;
 	border: dashed 2px #999;
-	margin:30px;
+	margin:20px;
 	text-align:center;
 	line-height:50px;
 }

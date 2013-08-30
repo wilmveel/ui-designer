@@ -7,8 +7,6 @@ app.directive('elementNew', function ($compile, $http, elementService) {
 		},	
 		link : function(scope, iElement){
 			
-			scope.name = scope.value.name;
-			
 			console.log("New element is selected in elementDrag", scope.value);
 	
 			iElement.draggable({

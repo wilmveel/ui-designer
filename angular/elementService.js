@@ -118,16 +118,4 @@ app.service('elementService', function($http, $q) {
 		}
 	};
 	
-	this.replaceElement = function(o, elm) {
-		for (i in o) {
-			if (typeof(o[i])=="object") {
-				if(o[i].id == elm.id){
-					console.log("Object Found and Replace");
-					o[i] = elm;
-				}
-				this.replaceElement(o[i], elm );
-			}
-		}
-	};
-	
 });

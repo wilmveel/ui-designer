@@ -44,7 +44,7 @@
 	<link href="css/element.css" rel="stylesheet" media="screen">
 
 	</head>
-	<body  ng-cloak>
+	<body ng-cloak>
 
 	  <div class="container" ng-controller="designerCtrl" >
 
@@ -74,23 +74,21 @@
 					  <div class="panel-heading">New element</div>
 						  <div class="panel-body">					  
 							
-							<div>
-							Grid: 
-							<span ng-repeat="template in templates | filter:{ group: 'grid' }" element-new value="template"  class="label label-default">{{name}} </span>
+							<div ng-repeat="group in getGroups()">
+							{{group}}: 
+							<span ng-repeat="template in templates | filter:{ group: group }" element-new value="template" class="label label-default">{{value.name}} </span>
 							</div>
-							
-							<div>
-							Form: 
-							<span ng-repeat="template in templates | filter:{ group: 'form' }" element-new value="template"  class="label label-default">{{name}} </span>
-							</div>
+	
 							
 						</div>
 					</div>
 					
 					<div class="panel panel-default">
 					  <div class="panel-heading">Edit element</div>
-						  <div class="panel-body" style='height:100px;' element-edit >					
-							Drop in element to edit
+						  <div class="panel-body" element-edit >					
+							<div class="please">
+								Drop in element to edit
+							</div>
 						</div>
 					</div>  					 
 				</div>
@@ -110,7 +108,7 @@
 						</tab>
 						<tab heading="Json">
 							<div >
-								<form-json val="getElements()" />
+								<element-json val="getElements()" />
 							</div>
 						</tab>
 					</tabset>
@@ -196,6 +194,44 @@
 								</div>
 							</div>
 						</div>
+						
+						<!-- Input for size -->
+						<div class="form-group" ng-show="element.size">
+							<label for="elementText">Size</label>
+							<div class="input-group">
+								<input type="text" class="form-control" ng-model="element.size" >
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+									<ul class="dropdown-menu pull-right">
+										<li><a href="#" ng-click="element.size = ''" >Normal</a></li>
+										<li><a href="#" ng-click="element.size = 'lg'" >Large</a></li>
+										<li><a href="#" ng-click="element.size = 'sm'" >Small</a></li>
+										<li><a href="#" ng-click="element.size = 'xs'" >Extra Small</a></li>
+
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						<!-- Input for color -->
+						<div class="form-group" ng-show="element.color">
+							<label for="elementText">Color</label>
+							<div class="input-group">
+								<input type="text" class="form-control" ng-model="element.color" >
+								<div class="input-group-btn">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+									<ul class="dropdown-menu pull-right">
+										<li><a href="#" ng-click="element.color = 'default'" >Default</a></li>
+										<li><a href="#" ng-click="element.color = 'primary'" >Primary</a></li>
+										<li><a href="#" ng-click="element.color = 'succes'" >Succes</a></li>
+										<li><a href="#" ng-click="element.color = 'info'" >Info</a></li>
+										<li><a href="#" ng-click="element.color = 'warning'" >Warning</a></li>
+										<li><a href="#" ng-click="element.color = 'danger'" >Danger</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
 						
 					</div>
 				  </div>

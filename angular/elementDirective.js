@@ -69,6 +69,11 @@ app.directive('element', function ($compile, $http, elementService) {
 				$compile(iElement.contents())(scope); 
 				
 			});
+			
+			scope.$watch("value", function(){
+				console.log("value change");
+				scope.reload();
+			});
 
 		}
 	}	
