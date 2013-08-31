@@ -14,6 +14,7 @@ app.directive('elementDrag', function ($compile, $http, elementService) {
 					iElement.draggable({
 						revert:true,
 						disabled: false,
+						cancel:false,
 						start:function(event,ui) {
 							console.log("Start draging", scope.value); 
 							angular.element(this).addClass("drag-active");

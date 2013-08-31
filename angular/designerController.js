@@ -71,7 +71,6 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 			"name" : "Panel",
 			"template":"panel",
 			"title" : "Title panel",
-			"text" : "Hallo test"
 			"color" : "default"
 		},
 		{
