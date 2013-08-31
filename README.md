@@ -14,3 +14,4 @@ Wishlist
 - Add more elements to the library
 - Make it possible to bind input fields to the ng-model
 - Validatino for input fields
+- Undo en Redo functions

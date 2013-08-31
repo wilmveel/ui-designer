@@ -72,6 +72,7 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 			"template":"panel",
 			"title" : "Title panel",
 			"text" : "Hallo test"
+			"color" : "default"
 		},
 		{
 			"group" : "tab",
