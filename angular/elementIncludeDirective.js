@@ -9,10 +9,8 @@ app.directive('elementInclude', function ($compile, $http) {
 			iElement.html(html);
 					
 			// Add tekst to element when no childeren availible
-			if(!angular.isArray(scope.value.elements)){
-				var please = $('<div ng-show="!value.elements.length" class="please">Please Drag Element</div>');
-				iElement.append(please);
-			}
+			var please = $('<div ng-show="!value.elements || value.elements.length == 0" class="please">Please Drag Element</div>');
+			iElement.append(please);
 			
 			$compile(iElement.contents())(scope); 
 			

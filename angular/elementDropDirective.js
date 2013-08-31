@@ -28,8 +28,10 @@ app.directive('elementDrop', function ($compile, $http, elementService) {
 								scope.switchElement(dragElement, dropElement);
 								scope.$emit("element-move", dragElement, dropElement);
 							}else{
+								var dragElement = angular.copy(dragElement);
+								dragElement.id = Math.floor((Math.random()*100000000000000000000000000)+1);
 								scope.addElement(dragElement, dropElement);
-								scope.$emit("element-add", dragElement, dropElement);
+								scope.$emit("element-add", elementService.dragElement, dropElement);
 							}
 														
 							angular.element(this).removeClass("drop-active");

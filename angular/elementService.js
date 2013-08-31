@@ -26,12 +26,14 @@ app.service('elementService', function($http, $q) {
 							"name" : "Text",
 							"template":"input",
 							"label" : "Last Name",
+							"placeholder" : "Last Name",
 							"ngmodel" : ""
 						},
 						{
 							"id" : 43,
 							"name" : "Text",
 							"template":"input",
+							"placeholder":"input",
 							"label" : "Email"
 						}
 					]
@@ -67,49 +69,62 @@ app.service('elementService', function($http, $q) {
 		}
 	];
 
-	this.switchElement = function(elm1, elm2) {
-		if(typeof elm1!='undefined' && typeof elm2!='undefined'){
-			var felm1 = this.findElement(this.elements, elm1);
-			var felm2 = this.findElement(this.elements, elm2);
-			console.log("Found", felm1, felm2);
-			felm1.data[felm1.i] = elm2;
-			felm2.data[felm2.i] = elm1;
-			
-			console.log("Found", felm1, felm2);
-		}else{
-			console.log("One of the elements is not selected");
-		}
+	this.switchElement = function(dragElement, dropElement) {
+		this.dragElement = dragElement;
+		this.dropElement = dropElement;
+		
+		// Find elements in json
+		var dragElementFound = this.findElement(this.elements, dragElement);
+		var dropElementFound = this.findElement(this.elements, dropElement);
+		console.log("Found", dragElementFound, dropElementFound);
+		
+		// Switch positions
+		dragElementFound.data[dragElementFound.i] = dropElement;
+		dropElementFound.data[dropElementFound.i] = dragElement;
 	};
 	
-	this.removeElement = function(elm) {
-		var felm = this.findElement(this.elements, elm);
-		felm.data.splice(felm.i, 1);
+	this.removeElement = function(dragElement) {
+		this.dragElement = dragElement;
+		
+		var dragElementFound = this.findElement(this.elements, dragElement);
+		
+		dragElementFound.data.splice(dragElementFound.i, 1);
 	}
 	
-	this.addElement = function(elm1, elm2) {
-		var felm = this.findElement(this.elements, elm2);
-		if(!(felm.data[felm.i].elements instanceof Array)){
-			felm.data[felm.i].elements = new Array();
+	this.addElement = function(dragElement, dropElement) {
+		this.dragElement = dragElement;
+		this.dropElement = dropElement;
+		
+		// Find drop element
+		var dropElementFound = this.findElement(this.elements, dropElement);
+		
+		if(!(dropElementFound.data[dropElementFound.i].elements instanceof Array)){
+			dropElementFound.data[dropElementFound.i].elements = new Array();
 		}
-		felm.data[felm.i].elements.push(elm1);
-		console.log("AddElm", elm1, felm.data[felm.i]);
+		
+		dropElementFound.data[dropElementFound.i].elements.push(dragElement);
+		console.log("AddElement", dragElement, dropElementFound.data[dropElementFound.i]);
 	}
 	
-	this.replaceElement = function(elm) {
-		var found = this.findElement(this.elements, elm);
-		found.data[found.i] = elm;
-		console.log("replaceElement", elm, found.data[found.i]);
+	this.replaceElement = function(dragElement) {
+		this.dragElement = dragElement;
+		
+		// Find drop element
+		var dragElementFound = this.findElement(this.elements, dropElement);
+		
+		dragElementFound.data[dragElementFound.i] = dragElement;
+		console.log("replaceElement", dragElement, dragElementFound.data[dragElementFound.i]);
 	}
 	
-	this.findElement = function(data, elm) {
-        for (var i in data) {
-            console.log(data[i]);
-            if(data[i].id && data[i].id == elm.id){
+	this.findElement = function(elements, elment) {
+        for (var i in elements) {
+            console.log(elements[i]);
+            if(elements[i].id && elements[i].id == elment.id){
 				console.log("Found");
-                return {"data" : data, "i": i};
+                return {"data" : elements, "i": i};
 			}
-			if (typeof(data[i].elements) == 'object') {
-				var retVal = this.findElement(data[i].elements, elm);
+			if (typeof(elements[i].elements) == 'object') {
+				var retVal = this.findElement(elements[i].elements, elment);
 				if (typeof retVal!='undefined') {
 					console.log("retVal");
 					return retVal;

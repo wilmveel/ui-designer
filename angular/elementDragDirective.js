@@ -18,7 +18,6 @@ app.directive('elementDrag', function ($compile, $http, elementService) {
 							console.log("Start draging", scope.value); 
 							angular.element(this).addClass("drag-active");
 							elementService.dragElement = scope.value;
-							elementService.dragScope = scope;
 						},
 						stop:function(event,ui) {
 							console.log("Stop draging", scope.value); 

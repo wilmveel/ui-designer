@@ -22,8 +22,6 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 		return $scope.groups;
 	}
 	
-	$scope.groups;
-	
 	$scope.templates = [
 		{
 			"group" : "grid",
@@ -45,7 +43,8 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 			"group" : "form",
 			"name" : "Input",
 			"template":"input",
-			"label":"Test Input"
+			"label":"Input label",
+			"placeholder": "Input placeholder"
 		},
 		{
 			"group" : "form",
@@ -61,16 +60,19 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 			"size":""
 		},
 		{
+			"group" : "panel",
 			"name" : "Panel",
 			"template":"panel",
 			"title" : "Title panel",
 			"text" : "Hallo test"
 		},
 		{
+			"group" : "tab",
 			"name" : "Tabset",
 			"template":"tabset",
 		},
 		{
+			"group" : "tab",
 			"name" : "Tab",
 			"template":"tab",
 		},
@@ -81,34 +83,15 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 	$scope.element = new Object();
    
 	$scope.icons = new Array(
-		".glyphicon-adjust",
-		".glyphicon-align-center", 
-		".glyphicon-align-justify", 
-		".glyphicon-align-left", 
-		".glyphicon-align-right",
-		".glyphicon-arrow-down",
-		".glyphicon-arrow-left",
-		".glyphicon-arrow-right",
-		".glyphicon-arrow-up",
-		"1.glyphicon-adjust",
-		"1.glyphicon-align-center", 
-		"1.glyphicon-align-justify", 
-		"1.glyphicon-align-left", 
-		"1.glyphicon-align-right",
-		"1.glyphicon-arrow-down",
-		"1.glyphicon-arrow-left",
-		"1.glyphicon-arrow-right",
-		"1.glyphicon-arrow-up",
-		"2.glyphicon-adjust",
-		"2.glyphicon-align-center", 
-		"2.glyphicon-align-justify", 
-		"2.glyphicon-align-left", 
-		"2.glyphicon-align-right",
-		"2.glyphicon-arrow-down",
-		"2.glyphicon-arrow-left",
-		"2.glyphicon-arrow-right",
-		"2.glyphicon-arrow-up"
-		
+		"glyphicon-adjust",
+		"glyphicon-align-center", 
+		"glyphicon-align-justify", 
+		"glyphicon-align-left", 
+		"glyphicon-align-right",
+		"glyphicon-arrow-down",
+		"glyphicon-arrow-left",
+		"glyphicon-arrow-right",
+		"glyphicon-arrow-up"
 	);
 	
 	$scope.refresh = function (){
@@ -129,16 +112,21 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 		$scope.element.icon = icon;
 	}
 	
-
 	$scope.save = function(){	
 		console.log("Save", $scope.element);
-		//elementService.replaceElement($scope.element);
-		elementService.dragScope.reload();
+		//elementService.dragElement = $scope.element;
+		//elementService.dragElement.label = "Piet";
+		
+		for (var key in $scope.element) {
+		  if ($scope.element.hasOwnProperty(key)) {
+			elementService.dragElement[key] = $scope.element[key];
+		  }
+		}
 		$("#myModal").modal('hide');
 	}
 	
 	$scope.edit = function(element){	
-		$scope.element = element;
+		$scope.element = angular.copy(element);
 		$("#myModal").modal('show');
 	}
 	
@@ -156,4 +144,4 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 	$scope.$on("element-edit", function(event, dragElement, dropElement){
 		$scope.edit(dragElement);
 	});
-});
+})

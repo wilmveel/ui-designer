@@ -12,13 +12,11 @@ app.directive('element', function ($compile, $http, elementService) {
 			
 			//Set some attributes of the value. should be latere replaced by loop
 			scope.reload = function(){
-				scope.name = scope.value.name; 
-				scope.columns = scope.value.columns; 
-				scope.id = scope.value.id; 
-				scope.text = scope.value.text; 
-				scope.label = scope.value.label; 
-				scope.title = scope.value.title; 
-				scope.template = scope.value.template;
+				for (var key in scope.value) {
+				  if (scope.value.hasOwnProperty(key)) {
+					scope[key] = scope.value[key];
+				  }
+				}
 			}
 			scope.reload();
 			
@@ -36,8 +34,6 @@ app.directive('element', function ($compile, $http, elementService) {
 				// Genetrate jquery object base on template
 				var drag = $(html);
 				drag.addClass("drag");
-				drag.attr("data-id", "{{value.id}}");
-				drag.attr("data-element", "{{value}}");
 				drag.attr("ng-click", "select($event)");
 				drag.attr("element-drag", "true");
 				
@@ -73,7 +69,7 @@ app.directive('element', function ($compile, $http, elementService) {
 			scope.$watch("value", function(){
 				console.log("value change");
 				scope.reload();
-			});
+			}, true);
 
 		}
 	}	

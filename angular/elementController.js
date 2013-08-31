@@ -50,9 +50,7 @@ app.controller('elementController', function($scope, elementService) {
 	
 	$scope.addElement = function(dragEl,dropEl){
 		console.log("addElement", "dragEl", dragEl, "dropEl", dropEl);
-		var elm = angular.copy(dragEl);
-		elm.id = Math.floor((Math.random()*10000000000)+1);
-		elementService.addElement(elm, dropEl);
+		elementService.addElement(dragEl, dropEl);
 	}
 	
 	$scope.appendElement = function(dragEl,dropEl){
@@ -62,13 +60,8 @@ app.controller('elementController', function($scope, elementService) {
 	
 	$scope.removeElement = function(elm){
 		console.log("RM");
-		//elementService.removeElement(elm);
-		
 		$scope.element = elementService.dragElement;
-		
 		$("#myModal").modal('show');
-		
-		
 	}
-	
+		
 });

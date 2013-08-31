@@ -133,19 +133,19 @@
 					  <div class="panel-body">
 
 					  <!-- Input for label -->
-						<div class="form-group" ng-show="element.label">
+						<div class="form-group" ng-show="element.label != null">
 							<label for="elementLabel">Label</label>
 							<input id="elementLabel" type="text" class="form-control" placeholder="Label" ng-model="element.label">
 						</div>
 						
 						<!-- Input for title -->
-						<div class="form-group" ng-show="element.title">
+						<div class="form-group" ng-show="element.title != null">
 							<label for="elementLabel">Label</label>
 							<input id="elementLabel" type="text" class="form-control" placeholder="Label" ng-model="element.title">
 						</div>
 						
 						<!-- Input for icon -->
-						<div class="form-group" ng-show="element.icon">
+						<div class="form-group" ng-show="element.icon != null">
 							<label for="elementText">Icon</label>
 							<div class="input-group">
 								<input type="text" class="form-control" ng-model="element.icon" readonly>
@@ -159,19 +159,25 @@
 						</div>
 						
 						<!-- Input for text -->
-						<div class="form-group" ng-show="element.text">
+						<div class="form-group" ng-show="element.text != null">
 							<label for="elementText">Text</label>
 							<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.text">
+						</div>	
+
+						<!-- Input for placeholder -->
+						<div class="form-group" ng-show="element.placeholder != null">
+							<label for="elementText">Placeholder</label>
+							<input id="elementText" type="placeholder" class="form-control" placeholder="Placeholder" ng-model="element.placeholder">
 						</div>
 						
 						<!-- Input for ng-model -->
-						<div class="form-group" ng-show="element.ngmodel">
+						<div class="form-group" ng-show="element.ngmodel != null">
 							<label for="elementText">ng-model</label>
 							<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.ngmodel">
 						</div>
 						
 						<!-- Input for columns -->
-						<div class="form-group" ng-show="element.columns">
+						<div class="form-group" ng-show="element.columns != null">
 							<label for="elementText">Columns</label>
 							<div class="input-group">
 								<input type="text" class="form-control" ng-model="element.columns" >
@@ -196,7 +202,7 @@
 						</div>
 						
 						<!-- Input for size -->
-						<div class="form-group" ng-show="element.size">
+						<div class="form-group" ng-show="element.size != null">
 							<label for="elementText">Size</label>
 							<div class="input-group">
 								<input type="text" class="form-control" ng-model="element.size" >
@@ -214,7 +220,7 @@
 						</div>
 						
 						<!-- Input for color -->
-						<div class="form-group" ng-show="element.color">
+						<div class="form-group" ng-show="element.color != null">
 							<label for="elementText">Color</label>
 							<div class="input-group">
 								<input type="text" class="form-control" ng-model="element.color" >
