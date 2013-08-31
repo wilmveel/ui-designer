@@ -15,3 +15,8 @@ Wishlist
 - Make it possible to bind input fields to the ng-model
 - Validatino for input fields
 - Undo en Redo functions
+
+Contact
+Willem Veelenturf
+http://willemveelenturf.nl
+willem.veelenturf@gmail.com
