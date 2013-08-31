@@ -46,6 +46,13 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 			"label":"Input label",
 			"placeholder": "Input placeholder"
 		},
+//		{
+//			"group" : "form",
+//			"name" : "Select",
+//			"template":"select",
+//			"label":"Input label",
+//			"placeholder": "Input placeholder"
+//		},
 		{
 			"group" : "form",
 			"name" : "Button",

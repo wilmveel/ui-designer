@@ -10,33 +10,41 @@ app.service('elementService', function($http, $q) {
 			"template":"row",
 			"elements" : [
 				{
-					"id" : 2,
-					"name" : "Column",
-					"columns" : 4,
-					"template":"column"
-				},
-				{
 					"id" : 3,
 					"name" : "Column",
-					"columns" : 8,
+					"columns" : 4,
 					"template":"column",
 					"elements": [
 						{
 							"id" : 42,
 							"name" : "Text",
-							"template":"input",
-							"label" : "Last Name",
-							"placeholder" : "Last Name",
-							"ngmodel" : ""
-						},
-						{
-							"id" : 43,
-							"name" : "Text",
-							"template":"input",
-							"placeholder":"input",
-							"label" : "Email"
+							"template":"panel",
+							"title" : "Panel",
+							"elements": [
+								{
+									"id" : 42,
+									"name" : "Text",
+									"template":"input",
+									"label" : "Last Name",
+									"placeholder" : "Last Name",
+									"ngmodel" : ""
+								},
+								{
+									"id" : 43,
+									"name" : "Text",
+									"template":"input",
+									"placeholder":"input",
+									"label" : "Email"
+								}
+							]
 						}
 					]
+				},
+				{
+					"id" : 2,
+					"name" : "Column",
+					"columns" : 8,
+					"template":"column"
 				}
 			]
 		},
