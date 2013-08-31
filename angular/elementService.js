@@ -20,7 +20,7 @@ app.service('elementService', function($http, $q) {
 							"name" : "Panel",
 							"template":"panel",
 							"title" : "Panel",
-							"color" : "alert",
+							"color" : "default",
 							"elements": [
 								{
 									"id" : 42,

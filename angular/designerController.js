@@ -83,6 +83,23 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 			"name" : "Tab",
 			"template":"tab",
 		},
+		
+		{
+			"group" : "navigation",
+			"name" : "Navbar",
+			"template":"navbar",
+		},
+		{
+			"group" : "navigation",
+			"name" : "Navbar header",
+			"template":"navbar_header",
+		},
+		{
+			"group" : "navigation",
+			"name" : "Navbar brand",
+			"template":"navbar_brand",
+			"text" : "Brand"
+		},
 
 	];
 
