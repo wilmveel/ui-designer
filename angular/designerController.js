@@ -46,19 +46,20 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService) {
 			"label":"Input label",
 			"placeholder": "Input placeholder"
 		},
-//		{
-//			"group" : "form",
-//			"name" : "Select",
-//			"template":"select",
-//			"label":"Input label",
-//			"placeholder": "Input placeholder"
-//		},
+		{
+			"group" : "form",
+			"name" : "Select",
+			"template":"select",
+			"label":"Input label",
+			"placeholder": "Input placeholder"
+		},
 		{
 			"group" : "form",
 			"name" : "Button",
 			"template":"button",
-			"label":"Button",
-			"color":"default"
+			"label": "Button",
+			"color": "default",
+			"size": ""
 		},
 		{
 			"group" : "form",
