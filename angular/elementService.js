@@ -36,6 +36,13 @@ app.service('elementService', function($http, $q) {
 									"template":"input",
 									"placeholder":"input",
 									"label" : "Email"
+								},
+								{
+									"id" : 44,
+									"name" : "Button",
+									"template":"button",
+									"label" : "Click Me",
+									"ngclick" : "info()"
 								}
 							]
 						}
@@ -64,13 +71,7 @@ app.service('elementService', function($http, $q) {
 							"id" : 9,
 							"name" : "Text",
 							"template":"text",
-							"text" : "Test 456"
-						},
-						{
-							"id" : 10,
-							"name" : "Text",
-							"template":"text",
-							"text" : "Test 789"
+							"text" : "This is a normal text element"
 						}
 					]
 				}

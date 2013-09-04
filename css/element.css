@@ -1,8 +1,10 @@
-.drag {
+.template {
 	cursor: move;
+}
+
+.drag {
 	position:relative;
 	z-index:50;
-	
 }
 
 .border {
@@ -11,7 +13,8 @@
 	height:100%;
 	top:0;
 	left:0;
-	border: dashed 2px #EEE;
+	border: dashed 2px #CCC;
+	cursor: move;
 }
 
 .drag-active .border {
@@ -22,8 +25,9 @@
 	position:absolute;
 	top:5px;
 	right:5px;
-	height:20px;
 	font-size:8px;
+	background-color:#333;
+	color:#CCC;
 }
 
 .drop {
@@ -39,12 +43,12 @@
 }
 
 .please {
-	height:50px;
 	background:#EEE;
 	border: dashed 2px #999;
-	margin:20px;
+	margin:10px auto;
+	padding:20px;
 	text-align:center;
-	line-height:50px;
+	
 }
 
 .drop-active .append{

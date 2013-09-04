@@ -29,9 +29,13 @@
 	
 	<script type="text/javascript" src="angular/elementController.js"></script>
 	<script type="text/javascript" src="angular/designerController.js"></script>
-	<script type="text/javascript" src="angular/editController.js"></script>
+	<script type="text/javascript" src="angular/previewController.js"></script>
+	
+	<script type="text/javascript" src="angular/labelService.js"></script>
+	<script type="text/javascript" src="angular/labelController.js"></script>
 	
 	<script type="text/javascript" src="angular/elementService.js"></script>
+	<script type="text/javascript" src="angular/templateService.js"></script>
 	
 	<script type="text/javascript" src="angular/elementDirective.js"></script>
 	<script type="text/javascript" src="angular/elementDragDirective.js"></script>
@@ -40,6 +44,12 @@
 	<script type="text/javascript" src="angular/elementDropDirective.js"></script>
 	<script type="text/javascript" src="angular/elementIncludeDirective.js"></script>
 	<script type="text/javascript" src="angular/elementJsonDirective.js"></script>
+	<script type="text/javascript" src="angular/elementHtmlDirective.js"></script>
+	<script type="text/javascript" src="angular/elementPreviewDirective.js"></script>
+	
+	<!-- prettify -->
+	<!--script src="js/prettify.js" defer="defer"></script-->
+	<style>.operative { font-weight: bold; border:1px solid yellow }</style>
 	
 	<link href="css/element.css" rel="stylesheet" media="screen">
 
@@ -70,27 +80,25 @@
 			
 				<!-- New and Edit elements -->
 				<div class="col-lg-3">
-					<div class="panel panel-default">
-					  <div class="panel-heading">New element</div>
-						  <div class="panel-body">					  
-							
-							<div ng-repeat="group in getGroups()">
-							{{group}}: 
-							<span ng-repeat="template in templates | filter:{ group: group }" element-new value="template" class="label label-default">{{value.name}} </span>
+					<div class="panel-group" id="accordion">
+						<div class="panel panel-default" ng-repeat="group in getGroups()">
+						  <div class="panel-heading">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{group}}">{{group}}</a>
 							</div>
-	
-							
+							  <div id="{{group}}" class="panel-collapse collapse">					  
+									<a class="btn btn-info btn-block template" ng-repeat="template in templates | filter:{ group: group }" element-new value="template" href="#">{{value.name}} </a>							
+							</div>
 						</div>
+						
+						<div class="panel panel-default">
+						  <div class="panel-heading">Edit element</div>
+							  <div class="panel-body" element-edit >					
+								<div class="please">
+									Drop in element to edit
+								</div>
+							</div>
+						</div>  				
 					</div>
-					
-					<div class="panel panel-default">
-					  <div class="panel-heading">Edit element</div>
-						  <div class="panel-body" element-edit >					
-							<div class="please">
-								Drop in element to edit
-							</div>
-						</div>
-					</div>  					 
 				</div>
 
 				
@@ -98,17 +106,74 @@
 				<div class="col-lg-9" >
 					<tabset>
 						<tab heading="Design">
-							
-							
 							<div class="editor" >
-						
-								<element value="element" ng-repeat="element in getElements()" />
-								
+								<element value="element" ng-repeat="element in getElements()" />	
 							</div>
 						</tab>
 						<tab heading="Json">
 							<div >
 								<element-json val="getElements()" />
+							</div>
+						</tab>
+						<tab heading="Html">
+							<div >
+								<element-html value="getElements()" />
+							</div>
+						</tab>
+						<tab heading="Preview">
+							<div class="editor" >
+								<element-preview value="getElements()" />
+							</div>
+						</tab>
+						<tab heading="Controller">
+							<textarea id="controllerText" style="width:100%" rows="20">
+app.controller('previewCtrl', function($scope) {
+   	$scope.info = function (){
+		alert("Test123");
+	}
+});							
+							</textarea>
+							<button class="btn" ng-click="controller()">Save</button>
+						</tab>
+						<tab heading="Labels">
+							<div class="editor" ng-controller="labelController" >
+								<div ng-repeat="(key, value) in labels">
+									<table class="table" >
+										<thead>
+											<tr>
+												<th colspan="2">{{key}}</th>
+											</tr>
+										</thead>
+										<tr ng-repeat="(label, text) in value">
+											<td width="300" >{{label}}</td>
+											<td>{{text}}</td>
+									</table>
+									<button class="btn btn-default pull-right" ng-click="addLabel(key)">Add Label</button>
+								</div>
+								<!-- Modal Add Label-->
+								<div class="modal fade" id="labelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+												<h4 class="modal-title">Edit element</h4>
+											</div>
+											<div class="modal-body">
+												<div class="form-group">
+													<label for="labelKey">Key</label>
+													<input id="labelKey" type="text" class="form-control" ng-model="label.key">
+												</div>
+												<div class="form-group">
+													<label for="labelValue">Value</label>
+													<input id="labelValue" type="text" class="form-control" ng-model="label.value">
+												</div>
+											</div>
+											<div class="modal-footer">
+											  <button type="button" class="btn btn-primary" ng-click="saveLabel()">Save changes</button>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</tab>
 					</tabset>
@@ -117,7 +182,7 @@
 		  </div>
 
 	  
-	  <div ng-controller="EditCtrl">
+	  <div>
 		  <!-- Modal -->
 		  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -140,28 +205,80 @@
 						
 						<!-- Input for title -->
 						<div class="form-group" ng-show="element.title != null">
-							<label for="elementLabel">Label</label>
+							<label for="elementLabel">Title</label>
 							<input id="elementLabel" type="text" class="form-control" placeholder="Label" ng-model="element.title">
 						</div>
 						
 						<!-- Input for icon -->
 						<div class="form-group" ng-show="element.icon != null">
 							<label for="elementText">Icon</label>
-							<div class="input-group">
-								<input type="text" class="form-control" ng-model="element.icon" readonly>
-								<div class="input-group-btn">
-									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
-									<ul class="dropdown-menu pull-right">
-										<li ng-repeat="icon in icons"><a href="#" ng-click="setIcon(icon)" >{{icon}}</a></li>
-									</ul>
-								</div>
-							</div>
+							<select class="form-control" ng-model="element.icon">
+								<option ng-repeat="icon in icons">{{icon}}</option>
+							</select>
 						</div>
+						
+						<!-- Input for type -->
+						<div class="form-group" ng-show="element.type != null">
+							<label for="elementText">Type</label>
+							<select class="form-control" ng-model="element.type">
+								<option>button</option>
+								<option>checkbox</option>
+								<option>color</option>
+								<option>date</option>
+								<option>datetime</option>
+								<option>datetime-local</option>
+								<option>email</option>
+								<option>file</option>
+								<option>hidden</option>
+								<option>image</option>
+								<option>month</option>
+								<option>number</option>
+								<option>password</option>
+								<option>radio</option>
+								<option>range</option>
+								<option>reset</option>
+								<option>search</option>
+								<option>submit</option>
+								<option>tel</option>
+								<option>text</option>
+								<option>time</option>
+								<option>url</option>
+								<option>week</option>
+							</select>
+						</div>
+						
+						<!-- Input for pull -->
+						<div class="form-group" ng-show="element.pull != null">
+							<label for="elementPull">Pull</label>
+							<select class="form-elementPull" ng-model="element.pull">
+								<option></option>
+								<option>left</option>
+								<option>right</option>
+							</select>
+						</div>
+						
+						<!-- Input for orientation -->
+						<div class="form-group" ng-show="element.orientation != null">
+							<label for="elementOrientation">Orientation</label>
+							<select id="elementOrientation" class="form-elementPull" ng-model="element.orientation">
+								<option></option>
+								<option>form-inline</option>
+								<option>form-horizontal</option>
+							</select>
+						</div>
+						
+						
 						
 						<!-- Input for text -->
 						<div class="form-group" ng-show="element.text != null">
 							<label for="elementText">Text</label>
 							<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.text">
+						</div>	
+						
+						<!-- Input for rows -->
+						<div class="form-group" ng-show="element.rows != null">
+							<label for="elementRows">Rows</label>
+							<input id="elementRows" type="number" class="form-control" ng-model="element.rows">
 						</div>	
 
 						<!-- Input for placeholder -->
@@ -174,6 +291,12 @@
 						<div class="form-group" ng-show="element.ngmodel != null">
 							<label for="elementText">ng-model</label>
 							<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.ngmodel">
+						</div>
+						
+						<!-- Input for ng-click -->
+						<div class="form-group" ng-show="element.ngclick != null">
+							<label for="elementText">ng-model</label>
+							<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.ngclick">
 						</div>
 						
 						<!-- Input for columns -->
@@ -250,6 +373,12 @@
 			  </div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		  </div><!-- /.modal -->
+		  
+		  
+		  
+		  
+
+		  
 		</div>
 		  </div>
 	</body>
