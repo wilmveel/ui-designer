@@ -1,3 +1,7 @@
+body {
+	margin-top:10px;
+}
+
 .template {
 	cursor: move;
 }
@@ -53,4 +57,11 @@
 
 .drop-active .append{
 	display:block;
+}
+
+
+.frame {
+	border: solid 1px #CCC;
+	margin : 10px;
+	padding : 10px;
 }

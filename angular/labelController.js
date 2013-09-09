@@ -2,26 +2,36 @@ app.controller('labelController', function($scope, labelService) {
 
 	$scope.file = "global-mcp-klantakkoord";
 	
+	$scope.f;
 	$scope.label;
 	$scope.labels;
 	
-	function init(){
-		labelService.loadLabels($scope.file).success(function(json){
-			console.log("Label Json", json);
-			$scope.labels = json;
-		});
+	$scope.service = labelService;
+	
+	$scope.init = function(){
+		console.log("init");
+		labelService.file = $scope.file;
+		labelService.loadLabels();
 	}
-	init();
+	$scope.init();
+	
+	$scope.$watch('service.getLabels()', function(newValue, oldValue) {
+		console.log("Reload lables", newValue, oldValue);
+		$scope.labels = newValue;
+	});
 	
 	$scope.addLabel = function(file){
+		console.log("addLabel");
+		$scope.f = file;
 		$("#labelModal").modal('show');
 	}
 	
 	$scope.saveLabel = function(){
-		
-		labelService.addLabel($scope.file, $scope.label.key, $scope.label.value);
-		$("#labelModal").modal('hide');
-		init();
+		console.log("saveLabel");
+		labelService.addLabel($scope.f, $scope.label.key, $scope.label.value).success(function(){
+			$("#labelModal").modal('hide');
+		});;
+		$scope.init();
 	}
 	
 	

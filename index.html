@@ -24,28 +24,15 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
 	
+	<script type="text/javascript" src="js/element-builder.js"></script>
+	
 	<!-- application -->
-	<script type="text/javascript" src="angular/angularFormApp.js"></script>
-	
-	<script type="text/javascript" src="angular/elementController.js"></script>
-	<script type="text/javascript" src="angular/designerController.js"></script>
-	<script type="text/javascript" src="angular/previewController.js"></script>
-	
-	<script type="text/javascript" src="angular/labelService.js"></script>
-	<script type="text/javascript" src="angular/labelController.js"></script>
-	
-	<script type="text/javascript" src="angular/elementService.js"></script>
-	<script type="text/javascript" src="angular/templateService.js"></script>
-	
-	<script type="text/javascript" src="angular/elementDirective.js"></script>
-	<script type="text/javascript" src="angular/elementDragDirective.js"></script>
-	<script type="text/javascript" src="angular/elementNewDirective.js"></script>
-	<script type="text/javascript" src="angular/elementEditDirective.js"></script>
-	<script type="text/javascript" src="angular/elementDropDirective.js"></script>
-	<script type="text/javascript" src="angular/elementIncludeDirective.js"></script>
-	<script type="text/javascript" src="angular/elementJsonDirective.js"></script>
-	<script type="text/javascript" src="angular/elementHtmlDirective.js"></script>
-	<script type="text/javascript" src="angular/elementPreviewDirective.js"></script>
+	<script type="text/javascript" src="app/designerApp.js"></script>
+	<script type="text/javascript" src="app/designerController.js"></script>
+	<script type="text/javascript" src="app/designerPreviewController.js"></script>
+	<script type="text/javascript" src="app/designerService.js"></script>
+
+		
 	
 	<!-- prettify -->
 	<!--script src="js/prettify.js" defer="defer"></script-->
@@ -67,7 +54,7 @@
 			  <span class="icon-bar"></span>
 			  <span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><b>Angular</b> Ui Studio</a>		  
+			<a class="navbar-brand" href="#"><b>Angular</b> Ui Designer</a>		  
 		  </div>
 		  
 		  <ul class="nav navbar-nav navbar-right">
@@ -110,6 +97,11 @@
 								<element value="element" ng-repeat="element in getElements()" />	
 							</div>
 						</tab>
+						<tab heading="Frame">
+							<div class="editor" >
+								<element-frame value="getElements()" />
+							</div>
+						</tab>
 						<tab heading="Json">
 							<div >
 								<element-json val="getElements()" />
@@ -134,47 +126,6 @@ app.controller('previewCtrl', function($scope) {
 });							
 							</textarea>
 							<button class="btn" ng-click="controller()">Save</button>
-						</tab>
-						<tab heading="Labels">
-							<div class="editor" ng-controller="labelController" >
-								<div ng-repeat="(key, value) in labels">
-									<table class="table" >
-										<thead>
-											<tr>
-												<th colspan="2">{{key}}</th>
-											</tr>
-										</thead>
-										<tr ng-repeat="(label, text) in value">
-											<td width="300" >{{label}}</td>
-											<td>{{text}}</td>
-									</table>
-									<button class="btn btn-default pull-right" ng-click="addLabel(key)">Add Label</button>
-								</div>
-								<!-- Modal Add Label-->
-								<div class="modal fade" id="labelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-												<h4 class="modal-title">Edit element</h4>
-											</div>
-											<div class="modal-body">
-												<div class="form-group">
-													<label for="labelKey">Key</label>
-													<input id="labelKey" type="text" class="form-control" ng-model="label.key">
-												</div>
-												<div class="form-group">
-													<label for="labelValue">Value</label>
-													<input id="labelValue" type="text" class="form-control" ng-model="label.value">
-												</div>
-											</div>
-											<div class="modal-footer">
-											  <button type="button" class="btn btn-primary" ng-click="saveLabel()">Save changes</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
 						</tab>
 					</tabset>
 				</div>
@@ -250,7 +201,7 @@ app.controller('previewCtrl', function($scope) {
 						<!-- Input for pull -->
 						<div class="form-group" ng-show="element.pull != null">
 							<label for="elementPull">Pull</label>
-							<select class="form-elementPull" ng-model="element.pull">
+							<select id="elementPull" class="form-control" ng-model="element.pull">
 								<option></option>
 								<option>left</option>
 								<option>right</option>

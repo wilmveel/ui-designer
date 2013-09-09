@@ -1,14 +1,22 @@
 app.service('labelService', function($http) {
 	
-	this.labels;
-	this.files;
+	this.file;
 	
-	this.loadLabels = function(file){
-		return $http.get("../label-service/getLabels.php?file=" + file);
+	var labels;
+	
+	this.loadLabels = function(){
+		return $http.get("../label-service/getLabels.php?file=" + this.file).success(function (json){
+			console.log("loadLabels", json);
+			labels = json;
+		});
 	}
 	
 	this.addLabel = function(file, key, value){
-		$http.get("../label-service/addLabel.php?file=" + file + "&key=" + key + "&value=" + value);
+		return $http.get("../label-service/addLabel.php?file=" + file + "&key=" + key + "&value=" + value);
+	}
+	
+	this.getLabels = function(){
+		return labels;
 	}
 	
 });

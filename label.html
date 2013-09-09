@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="App">
+	<head>
+
+		<meta name="description" content="AngularJS + jQuery UI Drag-n-Drop" />
+
+		<meta charset=utf-8 />
+		<title>Angular Ui Studio</title>
+		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+
+		 <!--[if lte IE 8]>
+			<script src="js/json2.js"></script>
+		<![endif]-->
+	  
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src="js/ui-bootstrap-0.5.0.js"></script>
+		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.5.0.js"></script>
+		
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+		
+		<!-- application -->	
+		<script type="text/javascript" src="angular/angularFormApp.js"></script>
+		
+		<script type="text/javascript" src="angular/labelService.js"></script>
+		<script type="text/javascript" src="angular/labelController.js"></script>
+		<script type="text/javascript" src="angular/labelDirective.js"></script>
+
+		</head>
+		<body ng-cloak>
+
+		  <div class="container" ng-controller="labelController" >
+			<tabset>
+				<tab heading="Labels">
+					<div class="editor" >
+						<div ng-repeat="(key, value) in labels">
+							<table class="table" >
+								<thead>
+									<tr>
+										<th colspan="2">{{key}}</th>
+									</tr>
+								</thead>
+								<tr ng-repeat="(label, text) in value">
+									<td width="300" >{{label}}</td>
+									<td>{{text}}</td>
+							</table>
+							<button class="btn btn-default pull-right" ng-click="addLabel(key)">Add Label</button>
+						</div>
+						<button ng-click="init()">Init</button>
+					</div>
+				</tab>
+				<tab heading="Preview">
+					<div class="editor" >
+						<i18n key="a" /></br>
+					</div>
+				</tab>
+			</tabset>
+		
+		<!-- Modal Add Label-->
+		<div class="modal fade" id="labelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Edit label</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="labelKey">Key</label>
+							<input id="labelKey" type="text" class="form-control" ng-model="label.key">
+						</div>
+						<div class="form-group">
+							<label for="labelValue">Value</label>
+							<input id="labelValue" type="text" class="form-control" ng-model="label.value">
+						</div>
+					</div>
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-primary" ng-click="saveLabel()">Save</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</body>
+</html>
