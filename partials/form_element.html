@@ -1,0 +1,151 @@
+<!-- Input for label -->
+<div class="form-group" ng-show="element.label != null">
+	<label for="elementLabel">Label</label>
+	<input id="elementLabel" type="text" class="form-control" placeholder="Label" ng-model="element.label">
+</div>
+
+<!-- Input for title -->
+<div class="form-group" ng-show="element.title != null">
+	<label for="elementLabel">Title</label>
+	<input id="elementLabel" type="text" class="form-control" placeholder="Label" ng-model="element.title">
+</div>
+
+<!-- Input for icon -->
+<div class="form-group" ng-show="element.icon != null">
+	<label for="elementText">Icon</label>
+	<select class="form-control" ng-model="element.icon">
+		<option ng-repeat="icon in icons">{{icon}}</option>
+	</select>
+</div>
+
+<!-- Input for type -->
+<div class="form-group" ng-show="element.type != null">
+	<label for="elementText">Type</label>
+	<select class="form-control" ng-model="element.type">
+		<option>button</option>
+		<option>checkbox</option>
+		<option>color</option>
+		<option>date</option>
+		<option>datetime</option>
+		<option>datetime-local</option>
+		<option>email</option>
+		<option>file</option>
+		<option>hidden</option>
+		<option>image</option>
+		<option>month</option>
+		<option>number</option>
+		<option>password</option>
+		<option>radio</option>
+		<option>range</option>
+		<option>reset</option>
+		<option>search</option>
+		<option>submit</option>
+		<option>tel</option>
+		<option>text</option>
+		<option>time</option>
+		<option>url</option>
+		<option>week</option>
+	</select>
+</div>
+
+<!-- Input for pull -->
+<div class="form-group" ng-show="element.pull != null">
+	<label for="elementPull">Pull</label>
+	<select id="elementPull" class="form-control" ng-model="element.pull">
+		<option></option>
+		<option>left</option>
+		<option>right</option>
+	</select>
+</div>
+
+<!-- Input for orientation -->
+<div class="form-group" ng-show="element.orientation != null">
+	<label for="elementOrientation">Orientation</label>
+	<select id="elementOrientation" class="form-elementPull" ng-model="element.orientation">
+		<option></option>
+		<option>form-inline</option>
+		<option>form-horizontal</option>
+	</select>
+</div>
+
+
+
+<!-- Input for text -->
+<div class="form-group" ng-show="element.text != null">
+	<label for="elementText">Text</label>
+	<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.text">
+</div>	
+
+<!-- Input for rows -->
+<div class="form-group" ng-show="element.rows != null">
+	<label for="elementRows">Rows</label>
+	<input id="elementRows" type="number" class="form-control" ng-model="element.rows">
+</div>	
+
+<!-- Input for placeholder -->
+<div class="form-group" ng-show="element.placeholder != null">
+	<label for="elementText">Placeholder</label>
+	<input id="elementText" type="placeholder" class="form-control" placeholder="Placeholder" ng-model="element.placeholder">
+</div>
+
+<!-- Input for columns -->
+<div class="form-group" ng-show="element.columns != null">
+	<label for="elementText">Columns</label>
+	<div class="input-group">
+		<input type="text" class="form-control" ng-model="element.columns" >
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+			<ul class="dropdown-menu pull-right">
+				<li><a href="#" ng-click="element.columns = 1" >1</a></li>
+				<li><a href="#" ng-click="element.columns = 2" >2</a></li>
+				<li><a href="#" ng-click="element.columns = 3" >3</a></li>
+				<li><a href="#" ng-click="element.columns = 4" >4</a></li>
+				<li><a href="#" ng-click="element.columns = 5" >5</a></li>
+				<li><a href="#" ng-click="element.columns = 6" >6</a></li>
+				<li><a href="#" ng-click="element.columns = 7" >7</a></li>
+				<li><a href="#" ng-click="element.columns = 8" >8</a></li>
+				<li><a href="#" ng-click="element.columns = 9" >9</a></li>
+				<li><a href="#" ng-click="element.columns = 10" >10</a></li>
+				<li><a href="#" ng-click="element.columns = 11" >11</a></li>
+				<li><a href="#" ng-click="element.columns = 12" >12</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!-- Input for size -->
+<div class="form-group" ng-show="element.size != null">
+	<label for="elementText">Size</label>
+	<div class="input-group">
+		<input type="text" class="form-control" ng-model="element.size" >
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+			<ul class="dropdown-menu pull-right">
+				<li><a href="#" ng-click="element.size = ''" >Normal</a></li>
+				<li><a href="#" ng-click="element.size = 'lg'" >Large</a></li>
+				<li><a href="#" ng-click="element.size = 'sm'" >Small</a></li>
+				<li><a href="#" ng-click="element.size = 'xs'" >Extra Small</a></li>
+
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!-- Input for color -->
+<div class="form-group" ng-show="element.color != null">
+	<label for="elementText">Color</label>
+	<div class="input-group">
+		<input type="text" class="form-control" ng-model="element.color" >
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+			<ul class="dropdown-menu pull-right">
+				<li><a href="#" ng-click="element.color = 'default'" >Default</a></li>
+				<li><a href="#" ng-click="element.color = 'primary'" >Primary</a></li>
+				<li><a href="#" ng-click="element.color = 'success'" >Success</a></li>
+				<li><a href="#" ng-click="element.color = 'info'" >Info</a></li>
+				<li><a href="#" ng-click="element.color = 'warning'" >Warning</a></li>
+				<li><a href="#" ng-click="element.color = 'danger'" >Danger</a></li>
+			</ul>
+		</div>
+	</div>
+</div>

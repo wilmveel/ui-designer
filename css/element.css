@@ -11,6 +11,15 @@ body {
 	z-index:50;
 }
 
+.drag-active {
+	z-index:100;
+}
+
+
+.panel-group .panel-element {
+	overflow:visible;
+}
+
 .border {
 	position:absolute;
 	width:100%;

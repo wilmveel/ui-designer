@@ -7,25 +7,25 @@ elementModule.service('elementService', function($http, $q) {
 	
 	this.elements = [
 		{
-			"id" : 1,
+			"uid" : 1,
 			"name":"Row",
 			"template":"row",
 			"elements" : [
 				{
-					"id" : 3,
+					"uid" : 3,
 					"name" : "Column",
 					"columns" : 4,
 					"template":"column",
 					"elements": [
 						{
-							"id" : 42,
+							"uid" : 42,
 							"name" : "Panel",
 							"template":"panel",
 							"title" : "Panel",
 							"color" : "default",
 							"elements": [
 								{
-									"id" : 42,
+									"uid" : 42,
 									"name" : "Text",
 									"template":"input",
 									"label" : "Last Name",
@@ -33,17 +33,18 @@ elementModule.service('elementService', function($http, $q) {
 									"ngmodel" : ""
 								},
 								{
-									"id" : 43,
+									"uid" : 43,
 									"name" : "Text",
 									"template":"input",
 									"placeholder":"input",
 									"label" : "Email"
 								},
 								{
-									"id" : 44,
+									"uid" : 44,
 									"name" : "Button",
 									"template":"button",
 									"label" : "Click Me",
+									"pull" : "right",
 									"ngclick" : "info()"
 								}
 							]
@@ -51,7 +52,7 @@ elementModule.service('elementService', function($http, $q) {
 					]
 				},
 				{
-					"id" : 2,
+					"uid" : 2,
 					"name" : "Column",
 					"columns" : 8,
 					"template":"column"
@@ -59,18 +60,18 @@ elementModule.service('elementService', function($http, $q) {
 			]
 		},
 		{
-			"id" : 7,
+			"uid" : 7,
 			"name":"test4",
 			"template":"row",
 			"elements": [
 				{
-					"id" : 8,
+					"uid" : 8,
 					"name" : "Column",
 					"columns" : 6,
 					"template":"column",
 					"elements": [
 						{
-							"id" : 9,
+							"uid" : 9,
 							"name" : "Text",
 							"template":"text",
 							"text" : "This is a normal text element"
@@ -131,7 +132,7 @@ elementModule.service('elementService', function($http, $q) {
 	this.findElement = function(elements, elment) {
         for (var i in elements) {
             console.log(elements[i]);
-            if(elements[i].id && elements[i].id == elment.id){
+            if(elements[i].uid && elements[i].uid == elment.uid){
 				console.log("Found");
                 return {"data" : elements, "i": i};
 			}
@@ -679,7 +680,8 @@ elementModule.directive('elementDrop', function ($compile, $http, elementService
 								scope.$emit("element-move", dragElement, dropElement);
 							}else{
 								var dragElement = angular.copy(dragElement);
-								dragElement.id = Math.floor((Math.random()*100000000000000000000000000)+1);
+								var uniqid = Date.now();
+								dragElement.id = uniqid;
 								scope.addElement(dragElement, dropElement);
 								scope.$emit("element-add", elementService.dragElement, dropElement);
 							}
