@@ -108,6 +108,9 @@ elementModule.service('elementService', function($http, $q) {
 		this.dragElement = dragElement;
 		this.dropElement = dropElement;
 		
+		// genarete uid for new element
+		dragElement = generateUid(dragElement);
+		
 		// Find drop element
 		var dropElementFound = this.findElement(this.elements, dropElement);
 		
@@ -144,6 +147,24 @@ elementModule.service('elementService', function($http, $q) {
 				}
 			}
 		}
+	};
+	
+	generateUid = function(element){
+		
+		// generate unique id for new element
+		var uniqid = Date.now();
+		element.uid = uniqid;
+		
+		console.log("Log Uid", element.uid);
+		
+		if(element.elements instanceof Array){
+			for(var i=0; i < element.elements.length; i++){
+				element.elements[i] = generateUid(element.elements[i]);
+			}
+		}
+		
+		return element;
+		
 	};
 	
 });
@@ -226,6 +247,12 @@ elementModule.directive('element', function ($compile, $http, elementService) {
 			
 			console.log("Init element", scope.value);
 			
+			// set element class
+			iElement.addClass("element");
+			if(scope.selected){
+				iElement.addClass("selected");
+			}
+			
 			//Set some attributes of the value. should be latere replaced by loop
 			scope.reload = function(){
 				for (var key in scope.value) {
@@ -267,14 +294,20 @@ elementModule.directive('element', function ($compile, $http, elementService) {
 				// Border is inside te element to indicate that it is selected
 				var border = $("<div/>");
 				border.addClass("border");
+				border.attr("ng-show", "selected");
 				drag.append(border);
 				
 				// Drop area only active when an item is draged 
 				var drop = $("<div />");
 				drop.addClass("drop");
-				border.attr("ng-show", "selected");
-				border.attr("element-drop", "true");
+				drop.attr("ng-show", "selected");
+				drop.attr("element-drop", "true");
 				drag.append(drop);
+				
+				// Drop area only active when an item is draged 
+				var click = $("<div />");
+				click.addClass("click");
+				drag.append(click);
 				
 				// Add and compile elements
 				iElement.html(drag);
@@ -675,13 +708,11 @@ elementModule.directive('elementDrop', function ($compile, $http, elementService
 							console.log("dragElement Value", dragElement);  
 							console.log("dropElement Value",  scope.value);  
 							
-							if(dragElement.id){
+							if(dragElement.uid){
 								scope.switchElement(dragElement, dropElement);
 								scope.$emit("element-move", dragElement, dropElement);
 							}else{
 								var dragElement = angular.copy(dragElement);
-								var uniqid = Date.now();
-								dragElement.id = uniqid;
 								scope.addElement(dragElement, dropElement);
 								scope.$emit("element-add", elementService.dragElement, dropElement);
 							}

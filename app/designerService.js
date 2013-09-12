@@ -20,6 +20,19 @@ app.service('designerService', function($http, $q) {
 		},
 		{
 			"group" : "form",
+			"name" : "Form Group Horizontal",
+			"template":"form_group_horizontal",
+			"label" : "Label",
+			"columns" : "3"
+		},
+		{
+			"group" : "form",
+			"name" : "Form Group Vertical ",
+			"template":"form_group_vertical",
+			"label" : "Label"
+		},
+		{
+			"group" : "input",
 			"name" : "Input",
 			"template":"input",
 			"label":"Input label",
@@ -27,27 +40,27 @@ app.service('designerService', function($http, $q) {
 			"type" : "text"
 		},
 		{
-			"group" : "form",
+			"group" : "input",
 			"name" : "Textarea",
 			"template":"textarea",
 			"label":"Input label",
 			"rows": "3"
 		},
 		{
-			"group" : "form",
+			"group" : "input",
 			"name" : "Select",
 			"template":"select",
 			"label":"Input label",
 			"placeholder": "Input placeholder"
 		},
 		{
-			"group" : "form",
+			"group" : "input",
 			"name" : "Checkbox",
 			"template":"checkbox",
 			"text":"I agree ...",
 		},
 		{
-			"group" : "form",
+			"group" : "input",
 			"name" : "Button",
 			"template":"button",
 			"label": "Button",
@@ -57,13 +70,6 @@ app.service('designerService', function($http, $q) {
 			"icon" : "",
 			"block" : 0,
 			"pull" : ""
-		},
-		{
-			"name" : "Button group",
-			"group" : "form",
-			"template":"button_group",
-			"label":"Button",
-			"size":""
 		},
 		{
 			"group" : "panel",
@@ -98,6 +104,19 @@ app.service('designerService', function($http, $q) {
 			"name" : "Navbar brand",
 			"template":"navbar_brand",
 			"text" : "Brand"
+		},
+		{
+			"group" : "test",
+			"name" : "Test Element",
+			"template":"form_group",
+			"label" : "Brand",
+			"columns" : "2",
+			"elements" : [
+				{
+					"template": "button",
+					"label": "Click Me",
+              }
+			]
 		},
 
 	];

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="App">
+	<head>
+
+		<meta name="description" content="AngularJS + jQuery UI Drag-n-Drop" />
+
+		<meta charset=utf-8 />
+		<title>Angular Ui Studio</title>
+		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+
+		 <!--[if lte IE 8]>
+			<script src="js/json2.js"></script>
+		<![endif]-->
+	  
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src="js/ui-bootstrap-0.5.0.js"></script>
+		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.5.0.js"></script>
+		
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+		
+		<script type="text/javascript" src="../element-builder/dist/element-builder.js"></script>
+		
+		<!-- application -->
+		<script type="text/javascript" src="app/designerApp.js"></script>
+		<script type="text/javascript" src="app/designerController.js"></script>
+		<script type="text/javascript" src="app/designerPreviewController.js"></script>
+		<script type="text/javascript" src="app/designerService.js"></script>
+		
+		<script type="text/javascript" src="app/projectController.js"></script>
+		<!--script type="text/javascript" src="app/projectService.js"></script-->
+
+	</head>
+	<body ng-cloak ng-controller="projectCtrl">
+		
+		<div class="container">
+			<table class="table">
+				<thead>
+					<th>Projects</th>
+					<th>Actions</th>
+				</thead>
+				<tr ng-repeat="project in projects"  >
+					<td>{{project}}</td>
+					<td><a href="#" ng-click="loadProject(project)" >Open</a></td>
+				</tr>
+			</table>
+		</div>
+		
+	</body>
+</html>
