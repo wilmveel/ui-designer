@@ -1,0 +1,10 @@
+<table class="table">
+	<thead>
+		<th>Projects</th>
+		<th>Actions</th>
+	</thead>
+	<tr ng-repeat="project in projects"  >
+		<td>{{project}}</td>
+		<td><a href="#/designer" ng-click="loadProject(project)" >Open</a></td>
+	</tr>
+</table>

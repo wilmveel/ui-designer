@@ -1,29 +1,23 @@
 <?php
-	//header('Content-type: application/json');	
+	session_start();
+	header('Content-type: application/json');	
 	
-	$dir = "data";
-	$json = "";
+	$id = $_GET['id'];
 	
-	if ($handle = opendir($dir )) {
+	$file = $id; 
+	
+	$content = file_get_contents("./data/" . $file);
+	$json = $content;
 
-
-		/* This is the correct way to loop over the directory. */
-		$json .= '[';
-		$first = false;
-		while (false !== ($entry = readdir($handle))) {
-			
-			if ($entry != "." && $entry != "..") {
-				if($first){
-					$json .= ',';
-				}
-				$first = true;
-				
-				$json .= '"' .$entry . '"';
-			}
-		}
-		$json .= ']';
-		closedir($handle);
+	echo $json;
+	
+	if (isset($_SESSION['history'][$file])){
+		$_SESSION['history'][$file] = array();
+		$_SESSION['history'][$file][0] = $json;
 	}
 	
-	echo $json;
+	if (isset($_SESSION['pointer'][$file])){
+		$_SESSION['pointer'][$file] = 0;
+	}
+
 ?>

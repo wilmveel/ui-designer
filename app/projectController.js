@@ -1,17 +1,22 @@
-app.controller('projectCtrl', function($scope, $http, elementService) {
-    
-	$scope.projects = new Array();
+app.controller('projectCtrl', function($scope, $http, projectService) {
 	
-	$http.get('service/projects_get.php').success(function(data){
+	$http.get('service/projects_list.php').success(function(data){
 		$scope.projects = data;
 	});
 	
 	$scope.loadProject = function(project){
-		console.log("Select row");
-		$http.get('service/data/' + project).success(function(data){
-			elementService.elements = data;
-		});
+		projectService.loadProject(project);
 	};
 	
+	$scope.save = function(){
+		console.log("save");
+		projectService.save();
+		return false;
+	};
 	
+	$scope.undo = function (){
+		console.log("undo");
+		projectService.undo();
+		return false;
+	}
 });

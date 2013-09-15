@@ -1,4 +1,4 @@
-app.controller('designerCtrl', function($scope, $rootScope, elementService, designerService) {
+app.controller('designerCtrl', function($scope, $rootScope, elementService, projectService, designerService) {
     
 	$scope.templates = designerService.templates;
 	
@@ -62,16 +62,14 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService, desi
 	}
 	
 	$scope.save = function(){	
-		console.log("Save", $scope.element);
-		//elementService.dragElement = $scope.element;
-		//elementService.dragElement.label = "Piet";
-		
+		console.log("Save", $scope.element);		
 		for (var key in $scope.element) {
 		  if ($scope.element.hasOwnProperty(key)) {
 			elementService.dragElement[key] = $scope.element[key];
 		  }
 		}
 		$("#myModal").modal('hide');
+		projectService.save();
 	}
 	
 	$scope.edit = function(element){	
@@ -92,5 +90,10 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService, desi
 	// Open model for edit after drop element
 	$scope.$on("element-edit", function(event, dragElement, dropElement){
 		$scope.edit(dragElement);
+	});
+	
+	// Save on element update event
+	$scope.$on("element-update", function(event, dragElement, dropElement){
+		projectService.save();
 	});
 })

@@ -1,0 +1,106 @@
+
+		
+		
+<div class="row">
+
+	<!-- New and Edit elements -->
+	<div class="col-lg-3">
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default panel-element" ng-repeat="group in getGroups()">
+			  <div class="panel-heading">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{group}}">{{group}}</a>
+				</div>
+				  <div id="{{group}}" class="panel-collapse collapse">					  
+						<a class="btn btn-info btn-block template" ng-repeat="template in templates | filter:{ group: group }" element-new value="template">{{value.name}} </a>							
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+			  <div class="panel-heading">Edit element</div>
+				  <div class="panel-body" element-edit >					
+					<div class="please">
+						Drop in element to edit
+					</div>
+				</div>
+			</div>  				
+		</div>
+	</div>
+
+	
+	<!-- Designer -->
+	<div class="col-lg-9" >
+		<tabset>
+			<tab heading="Design">
+				<div class="editor" >
+					<element value="element" ng-repeat="element in getElements()" />	
+				</div>
+			</tab>
+			<tab heading="Frame">
+				<div class="editor" >
+					<element-frame value="getElements()" />
+				</div>
+			</tab>
+			<tab heading="Json">
+				<div >
+					<element-json val="getElements()" />
+				</div>
+			</tab>
+			<tab heading="Html">
+				<div >
+					<element-html value="getElements()" />
+				</div>
+			</tab>
+			<tab heading="Preview">
+				<div class="editor" >
+					<element-preview value="getElements()" />
+				</div>
+			</tab>
+			<tab heading="Controller">
+				<textarea id="controllerText" style="width:100%" rows="20">
+app.controller('previewCtrl', function($scope) {
+$scope.info = function (){
+alert("Test123");
+}
+});							
+				</textarea>
+				<button class="btn" ng-click="controller()">Save</button>
+			</tab>
+		</tabset>
+	</div>
+
+</div>
+
+ <div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		  <h4 class="modal-title">Edit element</h4>
+		</div>
+		<div class="modal-body">
+			<tabset>
+				<tab heading="Element">
+					<div ng-include="'partials/form_element.html'" ></div>
+				</tab>
+				<tab heading="Html">
+					<div ng-include="'partials/form_html.html'" ></div>
+				</tab>
+				<tab heading="Angular">
+					<div ng-include="'partials/form_angular.html'" ></div>
+				</tab>
+				<tab heading="Validation">
+					<div ng-include="'partials/form_validation.html'" ></div>
+				</tab>
+			</tabset>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary" ng-click="remove()">Remove</button>
+		  <button type="button" class="btn btn-primary" ng-click="save()">Save changes</button>
+		</div>
+	  </div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+</div>

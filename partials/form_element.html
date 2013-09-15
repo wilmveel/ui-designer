@@ -93,21 +93,46 @@
 	<label for="elementText">Columns</label>
 	<div class="input-group">
 		<input type="text" class="form-control" ng-model="element.columns" >
+		<select class="form-control" ng-model="element.type">
+			<option>button</option>
+			<option>checkbox</option>
+			<option>color</option>
+			<option>date</option>
+			<option>datetime</option>
+			<option>datetime-local</option>
+			<option>email</option>
+			<option>file</option>
+			<option>hidden</option>
+			<option>image</option>
+			<option>month</option>
+			<option>number</option>
+			<option>password</option>
+			<option>radio</option>
+			<option>range</option>
+			<option>reset</option>
+			<option>search</option>
+			<option>submit</option>
+			<option>tel</option>
+			<option>text</option>
+			<option>time</option>
+			<option>url</option>
+			<option>week</option>
+		</select>
 		<div class="input-group-btn">
 			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
 			<ul class="dropdown-menu pull-right">
-				<li><a href="#" ng-click="element.columns = 1" >1</a></li>
-				<li><a href="#" ng-click="element.columns = 2" >2</a></li>
-				<li><a href="#" ng-click="element.columns = 3" >3</a></li>
-				<li><a href="#" ng-click="element.columns = 4" >4</a></li>
-				<li><a href="#" ng-click="element.columns = 5" >5</a></li>
-				<li><a href="#" ng-click="element.columns = 6" >6</a></li>
-				<li><a href="#" ng-click="element.columns = 7" >7</a></li>
-				<li><a href="#" ng-click="element.columns = 8" >8</a></li>
-				<li><a href="#" ng-click="element.columns = 9" >9</a></li>
-				<li><a href="#" ng-click="element.columns = 10" >10</a></li>
-				<li><a href="#" ng-click="element.columns = 11" >11</a></li>
-				<li><a href="#" ng-click="element.columns = 12" >12</a></li>
+				<li ng-click="element.columns = 1" >1</li>
+				<li ng-click="element.columns = 2" >2</li>
+				<li ng-click="element.columns = 3" >3</li>
+				<li ng-click="element.columns = 4" >4</li>
+				<li ng-click="element.columns = 5" >5</li>
+				<li ng-click="element.columns = 6" >6</li>
+				<li ng-click="element.columns = 7" >7</li>
+				<li ng-click="element.columns = 8" >8</li>
+				<li ng-click="element.columns = 9" >9</li>
+				<li ng-click="element.columns = 10" >10</li>
+				<li ng-click="element.columns = 11" >11</li>
+				<li ng-click="element.columns = 12" >12</li>
 			</ul>
 		</div>
 	</div>
@@ -121,11 +146,10 @@
 		<div class="input-group-btn">
 			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
 			<ul class="dropdown-menu pull-right">
-				<li><a href="#" ng-click="element.size = ''" >Normal</a></li>
-				<li><a href="#" ng-click="element.size = 'lg'" >Large</a></li>
-				<li><a href="#" ng-click="element.size = 'sm'" >Small</a></li>
-				<li><a href="#" ng-click="element.size = 'xs'" >Extra Small</a></li>
-
+				<li ng-click="element.size = ''" >Normal</li>
+				<li ng-click="element.size = 'lg'" >Large</li>
+				<li ng-click="element.size = 'sm'" >Small</li>
+				<li ng-click="element.size = 'xs'" >Extra Small</li>
 			</ul>
 		</div>
 	</div>
@@ -139,12 +163,12 @@
 		<div class="input-group-btn">
 			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
 			<ul class="dropdown-menu pull-right">
-				<li><a href="#" ng-click="element.color = 'default'" >Default</a></li>
-				<li><a href="#" ng-click="element.color = 'primary'" >Primary</a></li>
-				<li><a href="#" ng-click="element.color = 'success'" >Success</a></li>
-				<li><a href="#" ng-click="element.color = 'info'" >Info</a></li>
-				<li><a href="#" ng-click="element.color = 'warning'" >Warning</a></li>
-				<li><a href="#" ng-click="element.color = 'danger'" >Danger</a></li>
+				<li ng-click="element.color = 'default'" >Default</li>
+				<li ng-click="element.color = 'primary'" >Primary</li>
+				<li ng-click="element.color = 'success'" >Success</li>
+				<li ng-click="element.color = 'info'" >Info</li>
+				<li ng-click="element.color = 'warning'" >Warning</li>
+				<li ng-click="element.color = 'danger'" >Danger</li>
 			</ul>
 		</div>
 	</div>

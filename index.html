@@ -1,178 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:ng="http://angularjs.org" id="ng-app" ng-app="App">
-<head>
+	<head>
 
-	<meta name="description" content="AngularJS + jQuery UI Drag-n-Drop" />
+		<meta name="description" content="AngularJS + jQuery UI Drag-n-Drop" />
 
-	<meta charset=utf-8 />
-	<title>Angular Ui Studio</title>
-	<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+		<meta charset=utf-8 />
+		<title>Angular Ui Studio</title>
+		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
 
-	 <!--[if lte IE 8]>
-		<script src="js/json2.js"></script>
-	<![endif]-->
-  
-	<script type="text/javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" src="js/angular.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-	
-	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
-
-	<script type="text/javascript" src="js/ui-bootstrap-0.5.0.js"></script>
-	<script type="text/javascript" src="js/ui-bootstrap-tpls-0.5.0.js"></script>
-	
-	<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-	<link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
-	
-	<script type="text/javascript" src="../element-builder/dist/element-builder.js"></script>
-	
-	<!-- application -->
-	<script type="text/javascript" src="app/designerApp.js"></script>
-	<script type="text/javascript" src="app/designerController.js"></script>
-	<script type="text/javascript" src="app/designerPreviewController.js"></script>
-	<script type="text/javascript" src="app/designerService.js"></script>
-
+		 <!--[if lte IE 8]>
+			<script src="js/json2.js"></script>
+		<![endif]-->
+	  
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		
-	
-	<!-- prettify -->
-	<!--script src="js/prettify.js" defer="defer"></script-->
-	<style>.operative { font-weight: bold; border:1px solid yellow }</style>
-	
-	<link href="css/element.css" rel="stylesheet" media="screen">
+		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src="js/ui-bootstrap-0.5.0.js"></script>
+		<script type="text/javascript" src="js/ui-bootstrap-tpls-0.5.0.js"></script>
+		
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
+		
+		<script type="text/javascript" src="../element-builder/dist/element-builder.js"></script>
+		
+		<!-- application -->
+		<script type="text/javascript" src="app/designerApp.js"></script>
+		<script type="text/javascript" src="app/designerController.js"></script>
+		<script type="text/javascript" src="app/designerPreviewController.js"></script>
+		<script type="text/javascript" src="app/designerService.js"></script>
+		
+		<script type="text/javascript" src="app/projectController.js"></script>
+		<script type="text/javascript" src="app/projectService.js"></script>
+		
+		<!-- prettify -->
+		<!--script src="js/prettify.js" defer="defer"></script-->
+		
+		<link href="css/element.css" rel="stylesheet" media="screen">
 
 	</head>
-	<body ng-cloak>
-
-	  <div class="container" ng-controller="designerCtrl" >
-
-		<nav class="navbar navbar-default" role="navigation">
-		  <!-- Brand and toggle get grouped for better mobile display -->
-		  <div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-			  <span class="sr-only">Toggle navigation generator</span>
-			  <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
-			  <span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#"><b>Angular</b> Ui Designer</a>		  
-		  </div>
-		  
-		  <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span> Refresh</a></li>
-            <li><a href="#" ng-click="deselect()"><span class="glyphicon glyphicon-unchecked"></span> Deselect</a></li>
-          </ul>
-		</nav>
+	<body ng-cloak >
 		
-			<div class="row">
+		<div class="container" >
+			<nav class="navbar navbar-default" role="navigation">
+			  <!-- Brand and toggle get grouped for better mobile display -->
+			  <div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				  <span class="sr-only">Toggle navigation generator</span>
+				  <span class="icon-bar"></span>
+				  <span class="icon-bar"></span>
+				  <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><b>Angular</b> Ui Designer</a>		  
+			  </div>
+			  
+			  <ul class="nav navbar-nav navbar-right" ng-controller="projectCtrl" >
+				<li><a href="#/projects" ><span class="glyphicon glyphicon-arrow-left"></span> Projects</a></li>
+				<li><a href="#" ng-click="undo()"><span class="glyphicon glyphicon-step-backward"></span> Undo</a></li>
+				<li><a href="#" ng-click="deselect()"><span class="glyphicon glyphicon-unchecked"></span> Deselect</a></li>
+			  </ul>
+			</nav>
 			
-				<!-- New and Edit elements -->
-				<div class="col-lg-3">
-					<div class="panel-group" id="accordion">
-						<div class="panel panel-default panel-element" ng-repeat="group in getGroups()">
-						  <div class="panel-heading">
-							<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{group}}">{{group}}</a>
-							</div>
-							  <div id="{{group}}" class="panel-collapse collapse">					  
-									<a class="btn btn-info btn-block template" ng-repeat="template in templates | filter:{ group: group }" element-new value="template" href="#">{{value.name}} </a>							
-							</div>
-						</div>
-						
-						<div class="panel panel-default">
-						  <div class="panel-heading">Edit element</div>
-							  <div class="panel-body" element-edit >					
-								<div class="please">
-									Drop in element to edit
-								</div>
-							</div>
-						</div>  				
-					</div>
-				</div>
-
-				
-				<!-- Designer -->
-				<div class="col-lg-9" >
-					<tabset>
-						<tab heading="Design">
-							<div class="editor" >
-								<element value="element" ng-repeat="element in getElements()" />	
-							</div>
-						</tab>
-						<tab heading="Frame">
-							<div class="editor" >
-								<element-frame value="getElements()" />
-							</div>
-						</tab>
-						<tab heading="Json">
-							<div >
-								<element-json val="getElements()" />
-							</div>
-						</tab>
-						<tab heading="Html">
-							<div >
-								<element-html value="getElements()" />
-							</div>
-						</tab>
-						<tab heading="Preview">
-							<div class="editor" >
-								<element-preview value="getElements()" />
-							</div>
-						</tab>
-						<tab heading="Controller">
-							<textarea id="controllerText" style="width:100%" rows="20">
-app.controller('previewCtrl', function($scope) {
-   	$scope.info = function (){
-		alert("Test123");
-	}
-});							
-							</textarea>
-							<button class="btn" ng-click="controller()">Save</button>
-						</tab>
-					</tabset>
-				</div>
-		
-		  </div>
-
-	  
-	  <div>
-		  <!-- Modal -->
-		  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-			  <div class="modal-content">
-				<div class="modal-header">
-				  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				  <h4 class="modal-title">Edit element</h4>
-				</div>
-				<div class="modal-body">
-					<tabset>
-						<tab heading="Element">
-							<div ng-include="'partials/form_element.html'" ></div>
-						</tab>
-						<tab heading="Html">
-							<div ng-include="'partials/form_html.html'" ></div>
-						</tab>
-						<tab heading="Angular">
-							<div ng-include="'partials/form_angular.html'" ></div>
-						</tab>
-						<tab heading="Validation">
-							<div ng-include="'partials/form_validation.html'" ></div>
-						</tab>
-					</tabset>
-				</div>
-				<div class="modal-footer">
-				  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				  <button type="button" class="btn btn-primary" ng-click="remove()">Remove</button>
-				  <button type="button" class="btn btn-primary" ng-click="save()">Save changes</button>
-				</div>
-			  </div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		  </div><!-- /.modal -->
-		  
-		  
-		  
-		  
-
-		  
+			<div class="view" ng-view></div>
+			
 		</div>
-		  </div>
+		
 	</body>
 </html>
