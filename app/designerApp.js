@@ -5,7 +5,7 @@ var app = angular.module('App', ['element.builder', 'ui.bootstrap']).config(['$r
 		$routeProvider.otherwise({ redirectTo: '/designer' });
 	}]).run(function($http, elementService) {
 	
-		$http.get('service/data/onboarding_step01.json').success(function(data){
+		$http.get('../element-service/data/onboarding_step01.json').success(function(data){
 			elementService.elements = data;
 		});
     
