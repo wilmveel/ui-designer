@@ -1,31 +1,13 @@
 // Bootstrap the Application
 var app = angular.module('App', ['element.builder', 'ui.bootstrap']).config(['$routeProvider', function($routeProvider) {
-		$routeProvider.when('/projects', {templateUrl: 'projects.html', controller: 'projectCtrl'});
-		$routeProvider.when('/designer', {templateUrl: 'designer.html', controller: 'designerCtrl' });
+		$routeProvider.when('/projects', {templateUrl: 'partials/projects.html', controller: 'projectCtrl'});
+		$routeProvider.when('/designer', {templateUrl: 'partials/designer.html', controller: 'designerCtrl' });
 		$routeProvider.otherwise({ redirectTo: '/designer' });
-	}]).run(function(elementService) {
-    elementService.elements = [
-		{
-			"uid" : 1,
-			"name":"Row",
-			"template":"row",
-			"elements" : [
-				{
-					"uid" : 3,
-					"name" : "Column",
-					"columns" : 4,
-					"template":"column",
-					"elements": [
-						{
-							"uid" : 42,
-							"name" : "Panel",
-							"template":"panel",
-							"title" : "Panel",
-							"color" : "default",
-						}
-					]
-				}
-			]
-		}
-	];
+	}]).run(function($http, elementService) {
+	
+		$http.get('service/data/onboarding_step01.json').success(function(data){
+			elementService.elements = data;
+		});
+    
+	
 });

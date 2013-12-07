@@ -2,30 +2,65 @@ body {
 	margin-top:10px;
 }
 
-.element{
+/* element view canvas*/
+element-view-frame {
 	position: relative;
-	overflow:hidden;
-	cursor:move;
 }
 
-.template {
+element-view-frame element {
+	position: relative;
+	overflow: hidden;
+}
+
+element-view-frame element .frame{
+	border: solid 1px #333;
+	margin : 5px;
+	padding : 10px;
+	cursor: hand;
+	position: relative;
+}
+
+element-view-frame element .text{
+	margin : 0px;
+}
+
+element-view-frame element .edit{
+	position: absolute;
+	display:block;
+	right: 10px;
+	top:10px;
+}
+
+
+element-view-frame .selected {
+	background: #CCC;
 	cursor: move;
 }
 
-.drag { 
+/* element view canvas*/
+element-view-canvas {
+	position: relative;
+}
+
+element-view-canvas element {
+	position: relative;
+	display:block;
+	cursor: move;
+}
+
+element-view-canvas .template {
+	cursor: move;
+}
+
+element-view-canvas .drag { 
 	
 }
 
-.drag-active {
-	z-index:100;
-}
-
-
-.panel-group .panel-element {
+element-view-canvas .panel-group .panel-element {
 	overflow:visible;
 }
 
-.border {
+element-view-canvas .border {
 	position:absolute;
 	width:100%;
 	height:100%;
@@ -35,29 +70,21 @@ body {
 	cursor: move;
 }
 
-.drag-active .border {
-	
-}
+
 		
-.plop{
+element-view-canvas .plop{
 	position:absolute;
-	top:5px;
-	right:5px;
-	font-size:8px;
-	background-color:#333;
+	top:0px;
+	right:0px;
+	padding: 0px 5px;
+	background-color:#999;
 	color:#CCC;
+	z-index:100;
 }
 
-.drop {
-	position:absolute;
-	width:100%;
-	height:100%;
-	top:0;
-	left:0;
-	cursor:move;
-}
 
-.click {
+
+element-view-canvas .click {
 	position:absolute;
 	width:100%;
 	height:100%;
@@ -65,11 +92,17 @@ body {
 	left:0;
 }
 
-.drop-active {
+element-view-canvas .drag-active  {
+		background: #CCC;
+		z-index: 20;
+}
+
+element-view-canvas .drop-active {
 	background:#EEE;
+	z-index: 10
 }
 
-.please {
+element-view-canvas .please {
 	background:#EEE;
 	border: dashed 2px #999;
 	margin:10px auto;
@@ -78,13 +111,24 @@ body {
 	
 }
 
-.drop-active .append{
-	display:block;
+element-view-canvas .selected {
+	background: #CCC;
 }
 
 
-.frame {
-	border: solid 1px #CCC;
-	margin : 10px;
-	padding : 10px;
+element-view-canvas .attributes{
+	position:absolute;
+	z-index: 1;
+	top:0;
+	left:0;
+}
+
+/* Validation */
+element-view-preview input.ng-valid{
+	border: 1px solid #0F0;
+}
+
+element-view-preview input.ng-invalid{
+	border: 1px solid #F00;
+	background: #933;
 }

@@ -1,11 +1,17 @@
 <!-- Input for ng-model -->
-<div class="form-group" ng-show="element.ngmodel != null">
+<div class="form-group" ng-show="element.angular.model != null">
 	<label for="elementText">ng-model</label>
-	<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.ngmodel">
+	<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.angular.model">
+</div>
+
+<!-- Input for ng-model -->
+<div class="form-group" ng-show="element.angular.bind != null">
+	<label for="elementText">ng-bind</label>
+	<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.angular.bind">
 </div>
 
 <!-- Input for ng-click -->
-<div class="form-group" ng-show="element.ngclick != null">
-	<label for="elementText">ng-model</label>
-	<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.ngclick">
+<div class="form-group" ng-show="element.angular.click != null">
+	<label for="elementText">ng-click</label>
+	<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.angular.click">
 </div>

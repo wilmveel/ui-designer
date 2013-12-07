@@ -1,30 +1,26 @@
 app.controller('designerCtrl', function($scope, $rootScope, elementService, projectService, designerService) {
-    
+    	
 	$scope.templates = designerService.templates;
 	
 	$scope.selected = true;
+	
+	$scope.element = {};
+	$scope.validation = {};
 	 
 	//get all elements from the service
 	$scope.getElements = function (){
 		return elementService.elements;
 	}
 	
-	$scope.groups;
-	$scope.getGroups = function (){
-		if(!$scope.groups){
-			$scope.groups = new Array();
-			angular.forEach($scope.templates, function(value, key){
-				if($scope.groups.indexOf(value.group) < 0 && value.group){
-					$scope.groups.push(value.group);
-				}
-				console.log("Groups", value.group);
-			});
-			console.log("Groups", $scope.groups);
+	$scope.groups = new Array();
+	angular.forEach(designerService.templates, function(value, key){
+		if($scope.groups.indexOf(value.group) < 0 && value.group){
+			$scope.groups.push(value.group);
 		}
-		return $scope.groups;
-	}
-		
-	$scope.element = new Object();
+		console.log("Groups", value.group);
+	});
+	console.log("Groups", $scope.groups);
+
    
 	$scope.icons = new Array(
 		"glyphicon-adjust",
@@ -56,24 +52,66 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService, proj
 		$scope.element.icon = icon;
 	}
 	
-	$scope.controller = function (){
-		var controllerText = $("#controllerText").val();
-		$scope.$eval(controllerText);
-	}
-	
 	$scope.save = function(){	
-		console.log("Save", $scope.element);		
-		for (var key in $scope.element) {
-		  if ($scope.element.hasOwnProperty(key)) {
-			elementService.dragElement[key] = $scope.element[key];
-		  }
+		console.log("Save123", $scope.element);	
+		
+		if($scope.element.data.columns){
+		var columnsInv = 12 - $scope.element.data.columns
+		console.log("columnsInv", columnsInv);	
+		$scope.element.data.columnsInv = columnsInv;
 		}
+		
+		console.log("validator", $scope.validation);
+		console.log("element", $scope.element);
+		
+		//set data
+		elementService.element.data = $scope.element.data;
+		elementService.element.angular = $scope.element.angular;
+		
+		// Loop all validation rules
+		console.log("$scope.validation", $scope.validation);
+		var validation = {};
+		angular.forEach($scope.validation, function(value, key){
+			console.log("validation", key, value);
+			if(value.enable){
+				validation[key] = {};
+				validation[key].value = value.value;
+				validation[key].message = value.message;
+				
+			}
+		});
+		elementService.element.validation = validation;
+		$scope.validation = null;
+		
+		//orientation
+		var temp = elementService.element.template.split("-");
+		if($scope.element.data.orientation && $scope.element.data.orientation != ""){
+			template = temp[0] + "-" + $scope.element.data.orientation; 
+		}else{
+			template = temp[0];
+		}
+		elementService.element.template = template;
+
+		$scope.$broadcast("deselect");
+		
 		$("#myModal").modal('hide');
 		projectService.save();
 	}
 	
-	$scope.edit = function(element){	
+	$scope.edit = function(event, element){	
+		console.log("Edit", element);
+		elementService.element = element;
 		$scope.element = angular.copy(element);
+		
+		// Populate validations
+		$scope.validation = {};
+		angular.forEach(elementService.element.validation, function(value, key){
+			$scope.validation[key] = {};
+			$scope.validation[key].value = value.value;
+			$scope.validation[key].message = value.message;
+			$scope.validation[key].enable = true;
+		});
+		
 		$("#myModal").modal('show');
 	}
 	
@@ -84,12 +122,12 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService, proj
 	
 	// Open model for edit after drop element
 	$scope.$on("element-add", function(event, dragElement, dropElement){
-		$scope.edit(dragElement);
+		$scope.edit(event, dragElement);
 	});
 	
 	// Open model for edit after drop element
 	$scope.$on("element-edit", function(event, dragElement, dropElement){
-		$scope.edit(dragElement);
+		$scope.edit(event, dragElement);
 	});
 	
 	// Save on element update event

@@ -1,10 +1,11 @@
-app.controller('projectCtrl', function($scope, $http, projectService) {
+app.controller('projectCtrl', function($scope, $rootScope, $http, projectService) {
 	
 	$http.get('service/projects_list.php').success(function(data){
 		$scope.projects = data;
 	});
 	
 	$scope.loadProject = function(project){
+		console.log("loadProject");
 		projectService.loadProject(project);
 	};
 	
@@ -18,5 +19,10 @@ app.controller('projectCtrl', function($scope, $http, projectService) {
 		console.log("undo");
 		projectService.undo();
 		return false;
+	}
+	
+	$scope.deselect = function (){
+		console.log("deselect all");
+		$rootScope.$broadcast('deselect');
 	}
 });

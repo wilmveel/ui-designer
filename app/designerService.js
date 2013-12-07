@@ -9,112 +9,126 @@ app.service('designerService', function($http, $q) {
 		{	
 			"group" : "grid",
 			"name" : "Column",
-			"columns" : 6,
-			"template":"column"
+			"template":"column",
+			"data" : {
+				"columns" : 6
+			}
 		},
 		{
 			"group" : "form",
 			"name" : "Form",
-			"template":"form",
-			"orientation":"",
-		},
-		{
-			"group" : "form",
-			"name" : "Form Group Horizontal",
-			"template":"form_group_horizontal",
-			"label" : "Label",
-			"columns" : "3"
-		},
-		{
-			"group" : "form",
-			"name" : "Form Group Vertical ",
-			"template":"form_group_vertical",
-			"label" : "Label"
+			"template" : "form",
+			"data" : {
+				"orientation":""
+			}
 		},
 		{
 			"group" : "input",
 			"name" : "Input",
 			"template":"input",
-			"label":"Input label",
-			"placeholder": "Input placeholder",
-			"type" : "text"
+			"data" : {
+				"label":"Input label",
+				"placeholder": "Input placeholder",
+				"type" : "text",
+				"columns" : 3,
+				"orientation":""
+			}
 		},
 		{
 			"group" : "input",
 			"name" : "Textarea",
 			"template":"textarea",
-			"label":"Input label",
-			"rows": "3"
+			"data" : {
+				"label":"Input label",
+				"rows": "3",
+				"orientation":""
+			}
 		},
 		{
 			"group" : "input",
 			"name" : "Select",
 			"template":"select",
-			"label":"Input label",
-			"placeholder": "Input placeholder"
+			"data" : {
+				"label":"Input label",
+				"placeholder": "Input placeholder",
+				"orientation":""
+			}
 		},
 		{
 			"group" : "input",
 			"name" : "Checkbox",
 			"template":"checkbox",
-			"text":"I agree ...",
+			"data" : {
+				"text":"I agree ...",
+				"columns" : 3,
+				"orientation":""
+			}
 		},
 		{
 			"group" : "input",
 			"name" : "Button",
 			"template":"button",
-			"label": "Button",
-			"color": "default",
-			"size": "",
-			"ngclick": "alert('test')",
-			"icon" : "",
-			"block" : 0,
-			"pull" : ""
+			"data" : {
+				"label": "Button",
+				"color": "default",
+				"size": "",
+				"ngclick": "alert('test')",
+				"icon" : "",
+				"block" : 0,
+				"orientation":"",
+				"columns" : 3
+			}
 		},
 		{
 			"group" : "panel",
 			"name" : "Panel",
 			"template":"panel",
-			"title" : "Title panel",
-			"color" : "default"
+			"data" : {
+				"title" : "Title panel",
+				"color" : "default"
+			}
 		},
 		{
 			"group" : "tab",
 			"name" : "Tabset",
-			"template":"tabset",
+			"template":"tabset"
 		},
 		{
 			"group" : "tab",
 			"name" : "Tab",
-			"template":"tab",
+			"template":"tab"
 		},
 		
 		{
 			"group" : "navigation",
 			"name" : "Navbar",
-			"template":"navbar",
+			"template":"navbar"
 		},
 		{
 			"group" : "navigation",
 			"name" : "Navbar header",
-			"template":"navbar_header",
+			"template":"navbar_header"
 		},
 		{
 			"group" : "navigation",
 			"name" : "Navbar brand",
 			"template":"navbar_brand",
-			"text" : "Brand"
+			"data" : {
+				"text" : "Brand"
+			}
 		},
 		{
 			"group" : "test",
 			"name" : "Test Element",
 			"template":"form_group",
-			"label" : "Brand",
-			"columns" : "2",
+			"data" : {
+				"label" : "Brand",
+				"columns" : "2"
+			},
 			"elements" : [
 				{
 					"template": "button",
-					"label": "Click Me",
+					"label": "Click Me"
               }
 			]
 		},

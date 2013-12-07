@@ -1,0 +1,135 @@
+[
+    {
+        "id": 1,
+        "name": "Panel",
+        "template": "panel",
+        "data": {
+            "title": "Persoonsgegevens",
+            "color": "default"
+        },
+        "elements": [
+            {
+                "id": 11,
+                "name": "Form",
+                "template": "form-horizontal",
+                "data": {
+                    "orientation": "horizontal"
+                },
+                "elements": [
+                    {
+                        "id": 111,
+                        "name": "Input Initiales",
+                        "template": "input-horizontal",
+                        "data": {
+                            "orientation": "horizontal",
+                            "label": "Voorletter(s)",
+                            "placeholder": "Voorletter(s)",
+                            "columns": 4,
+                            "columnsInv": 8,
+                            "text": ""
+                        },
+                        "angular": {
+                            "model": "data.initiales"
+                        },
+						"validation": {
+							"required": {
+								"message": "Dit veld is verplicht!"
+							}
+						}
+                    },
+                    {
+                        "id": 112,
+                        "name": "Input Callname",
+                        "template": "input-horizontal",
+                        "data": {
+                            "orientation": "horizontal",
+                            "label": "Roepnaam",
+                            "placeholder": "Roepnaam",
+                            "columns": 4,
+                            "columnsInv": 8,
+                            "text": ""
+                        },
+                        "angular": {
+                            "model": "data.callname"
+                        },
+						"validation": {
+							"ngMinlength": {
+								"value": 3,
+								"message": "Minimaal 3 tekens"
+							}
+						}
+                    },
+                    {
+                        "id": 113,
+                        "name": "Input",
+                        "template": "input-horizontal",
+                        "data": {
+                            "orientation": "horizontal",
+                            "label": "Voornaam",
+                            "placeholder": "Voornaam",
+                            "columns": 4,
+                            "columnsInv": 8,
+                            "text": ""
+                        },
+                        "angular": {
+                            "model": "data.firstname"
+                        },
+						"validation": {
+							"ngMaxlength": {
+								"value": 6,
+								"message": "Maximaal 6 tekens"
+							}
+						}
+                    },
+                    {
+                        "id": 114,
+                        "name": "Input Prefix",
+                        "template": "input-horizontal",
+                        "data": {
+                            "orientation": "horizontal",
+                            "label": "Tussenvoegsel(s)",
+                            "placeholder": "Tussenvoegsel(s)",
+                            "columns": 4,
+                            "columnsInv": 8,
+                            "text": ""
+                        },
+                        "angular": {
+                            "model": "data.prefix"
+                        }
+                    },
+                    {
+                        "id": 115,
+                        "name": "Input Lastname",
+                        "template": "input-horizontal",
+                        "data": {
+                            "orientation": "horizontal",
+                            "label": "Achternaam",
+                            "placeholder": "Achternaam",
+                            "columns": 4,
+                            "columnsInv": 8,
+                            "text": "Dit is de achternaam zoals vermed in pasport, identiteitskaar of rijbewijs"
+                        },
+                        "angular": {
+                            "model": "data.lastname"
+                        }
+                    },
+                    {
+                        "id": 116,
+                        "name": "Submit",
+                        "template": "button-horizontal",
+                        "data": {
+                            "orientation": "horizontal",
+                            "label": "Test",
+                            "color": "default",
+                            "columns": 4,
+                            "columnsInv": 8
+                        },
+                        "angular": {
+                            "click": "test()"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,27 +1,27 @@
 <!-- Input for label -->
-<div class="form-group" ng-show="element.label != null">
+<div class="form-group" ng-show="element.data.label != null">
 	<label for="elementLabel">Label</label>
-	<input id="elementLabel" type="text" class="form-control" placeholder="Label" ng-model="element.label">
+	<input id="elementLabel" type="text" class="form-control" placeholder="Label" ng-model="element.data.label">
 </div>
 
 <!-- Input for title -->
-<div class="form-group" ng-show="element.title != null">
+<div class="form-group" ng-show="element.data.title != null">
 	<label for="elementLabel">Title</label>
-	<input id="elementLabel" type="text" class="form-control" placeholder="Label" ng-model="element.title">
+	<input id="elementLabel" type="text" class="form-control" placeholder="Label" ng-model="element.data.title">
 </div>
 
 <!-- Input for icon -->
-<div class="form-group" ng-show="element.icon != null">
+<div class="form-group" ng-show="element.data.icon != null">
 	<label for="elementText">Icon</label>
-	<select class="form-control" ng-model="element.icon">
+	<select class="form-control" ng-model="element.data.icon">
 		<option ng-repeat="icon in icons">{{icon}}</option>
 	</select>
 </div>
 
 <!-- Input for type -->
-<div class="form-group" ng-show="element.type != null">
+<div class="form-group" ng-show="element.data.type != null">
 	<label for="elementText">Type</label>
-	<select class="form-control" ng-model="element.type">
+	<select class="form-control" ng-model="element.data.type">
 		<option>button</option>
 		<option>checkbox</option>
 		<option>color</option>
@@ -49,9 +49,9 @@
 </div>
 
 <!-- Input for pull -->
-<div class="form-group" ng-show="element.pull != null">
+<div class="form-group" ng-show="element.data.pull != null">
 	<label for="elementPull">Pull</label>
-	<select id="elementPull" class="form-control" ng-model="element.pull">
+	<select id="elementPull" class="form-control" ng-model="element.data.pull">
 		<option></option>
 		<option>left</option>
 		<option>right</option>
@@ -59,41 +59,62 @@
 </div>
 
 <!-- Input for orientation -->
-<div class="form-group" ng-show="element.orientation != null">
+<div class="form-group" ng-show="element.data.orientation != null">
 	<label for="elementOrientation">Orientation</label>
-	<select id="elementOrientation" class="form-control" ng-model="element.orientation">
+	<select id="elementOrientation" class="form-control" ng-model="element.data.orientation">
 		<option></option>
 		<option>inline</option>
 		<option>horizontal</option>
 	</select>
 </div>
 
-
-
 <!-- Input for text -->
-<div class="form-group" ng-show="element.text != null">
+<div class="form-group" ng-show="element.data.text != null">
 	<label for="elementText">Text</label>
-	<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.text">
+	<input id="elementText" type="text" class="form-control" placeholder="Text" ng-model="element.data.text">
 </div>	
 
 <!-- Input for rows -->
-<div class="form-group" ng-show="element.rows != null">
+<div class="form-group" ng-show="element.data.rows != null">
 	<label for="elementRows">Rows</label>
-	<input id="elementRows" type="number" class="form-control" ng-model="element.rows">
+	<input id="elementRows" type="number" class="form-control" ng-model="element.data.rows">
 </div>	
 
 <!-- Input for placeholder -->
-<div class="form-group" ng-show="element.placeholder != null">
+<div class="form-group" ng-show="element.data.placeholder != null">
 	<label for="elementText">Placeholder</label>
-	<input id="elementText" type="placeholder" class="form-control" placeholder="Placeholder" ng-model="element.placeholder">
+	<input id="elementText" type="placeholder" class="form-control" placeholder="Placeholder" ng-model="element.data.placeholder">
 </div>
 
 <!-- Input for columns -->
-<div class="form-group" ng-show="element.columns != null">
+<div class="form-group" ng-show="element.data.columns != null">
 	<label for="elementText">Columns</label>
 	<div class="input-group">
-		<input type="text" class="form-control" ng-model="element.columns" >
-		<select class="form-control" ng-model="element.type">
+		<input type="text" class="form-control" ng-model="element.data.columns" >
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
+			<ul class="dropdown-menu pull-right">
+				<li ng-click="element.data.columns = 1" ><a>1</a></li>
+				<li ng-click="element.data.columns = 2" ><a>2</a></li>
+				<li ng-click="element.data.columns = 3" ><a>3</a></li>
+				<li ng-click="element.data.columns = 4" ><a>4</a></li>
+				<li ng-click="element.data.columns = 5" ><a>5</a></li>
+				<li ng-click="element.data.columns = 6" ><a>6</a></li>
+				<li ng-click="element.data.columns = 7" ><a>7</a></li>
+				<li ng-click="element.data.columns = 8" ><a>8</a></li>
+				<li ng-click="element.data.columns = 9" ><a>9</a></li>
+				<li ng-click="element.data.columns = 10" ><a>10</a></li>
+				<li ng-click="element.data.columns = 11" ><a>11</a></li>
+				<li ng-click="element.data.columns = 12" ><a>12</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!-- Input for columns -->
+<div class="form-group" ng-show="element.data.type != null">
+	<label for="elementText">Type</label>
+		<select class="form-control" ng-model="element.data.type">
 			<option>button</option>
 			<option>checkbox</option>
 			<option>color</option>
@@ -118,57 +139,39 @@
 			<option>url</option>
 			<option>week</option>
 		</select>
-		<div class="input-group-btn">
-			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
-			<ul class="dropdown-menu pull-right">
-				<li ng-click="element.columns = 1" ><a>1</a></li>
-				<li ng-click="element.columns = 2" ><a>2</a></li>
-				<li ng-click="element.columns = 3" ><a>3</a></li>
-				<li ng-click="element.columns = 4" ><a>4</a></li>
-				<li ng-click="element.columns = 5" ><a>5</a></li>
-				<li ng-click="element.columns = 6" ><a>6</a></li>
-				<li ng-click="element.columns = 7" ><a>7</a></li>
-				<li ng-click="element.columns = 8" ><a>8</a></li>
-				<li ng-click="element.columns = 9" ><a>9</a></li>
-				<li ng-click="element.columns = 10" ><a>10</a></li>
-				<li ng-click="element.columns = 11" ><a>11</a></li>
-				<li ng-click="element.columns = 12" ><a>12</a></li>
-			</ul>
-		</div>
-	</div>
 </div>
 
 <!-- Input for size -->
-<div class="form-group" ng-show="element.size != null">
+<div class="form-group" ng-show="element.data.size != null">
 	<label for="elementText">Size</label>
 	<div class="input-group">
-		<input type="text" class="form-control" ng-model="element.size" >
+		<input type="text" class="form-control" ng-model="element.data.size" >
 		<div class="input-group-btn">
 			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
 			<ul class="dropdown-menu pull-right">
-				<li ng-click="element.size = ''" ><a>Normal</a></li>
-				<li ng-click="element.size = 'lg'" ><a>Large</a></li>
-				<li ng-click="element.size = 'sm'" ><a>Small</a></li>
-				<li ng-click="element.size = 'xs'" ><a>Extra Small</a></li>
+				<li ng-click="element.data.size = ''" ><a>Normal</a></li>
+				<li ng-click="element.data.size = 'lg'" ><a>Large</a></li>
+				<li ng-click="element.data.size = 'sm'" ><a>Small</a></li>
+				<li ng-click="element.data.size = 'xs'" ><a>Extra Small</a></li>
 			</ul>
 		</div>
 	</div>
 </div>
 
 <!-- Input for color -->
-<div class="form-group" ng-show="element.color != null">
+<div class="form-group" ng-show="element.data.color != null">
 	<label for="elementText">Color</label>
 	<div class="input-group">
-		<input type="text" class="form-control" ng-model="element.color" >
+		<input type="text" class="form-control" ng-model="element.data.color" >
 		<div class="input-group-btn">
 			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Action <span class="caret"></span></button>
 			<ul class="dropdown-menu pull-right">
-				<li ng-click="element.color = 'default'" ><a>Default</a></li>
-				<li ng-click="element.color = 'primary'" ><a>Primary</a></li>
-				<li ng-click="element.color = 'success'" ><a>Success</a></li>
-				<li ng-click="element.color = 'info'" ><a>Info</a></li>
-				<li ng-click="element.color = 'warning'" ><a>Warning</a></li>
-				<li ng-click="element.color = 'danger'" ><a>Danger</a></li>
+				<li ng-click="element.data.color = 'default'" ><a>Default</a></li>
+				<li ng-click="element.data.color = 'primary'" ><a>Primary</a></li>
+				<li ng-click="element.data.color = 'success'" ><a>Success</a></li>
+				<li ng-click="element.data.color = 'info'" ><a>Info</a></li>
+				<li ng-click="element.data.color = 'warning'" ><a>Warning</a></li>
+				<li ng-click="element.data.color = 'danger'" ><a>Danger</a></li>
 			</ul>
 		</div>
 	</div>

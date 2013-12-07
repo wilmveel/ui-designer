@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<style>
+			.element {
+				position: relative;
+				display: block;
+			}
+						
+			.tools {
+				position: absolute;
+				display:none;
+				top:0;
+				left:0;
+				cursor: move;
+			}
+			
+			.click{
+				position: absolute;
+				top:0;
+				left:0;
+				background-color: #999;
+				width:100%;
+				height:100%;
+			}
+			
+			.border{
+				position: absolute;
+				top:0;
+				left:0;
+				background-color: #DDD;
+				border: dashed 2px #333;
+			}
+			
+			.element:hover .tools{
+				display:block;
+			}
+		</style>
+		
+		<script>
+			$( document ).ready(function() {
+				var element = $( ".template" );
+				var height = element.outerHeight();
+				var width = element.outerWidth();
+				var margin = element.css('margin')
+				//alert(height + "-" + width);
+				
+				var tools = $( ".tools" );
+				tools.height(height);
+				tools.width(width);
+				tools.css("margin", margin);
+				
+				var border = $( ".border" );
+				border.height(height-4);
+				border.width(width-4);
+				
+				
+			});
+		</script>
+	</head>
+	
+	<body>
+	<element class="element">
+		<input class="template" class="inp" type="text"></input>
+		<div class="tools">
+			<div class="click"></div> 
+			<div class="border"></div> 
+		</div>
+	</element>
+	</body>
+</html>

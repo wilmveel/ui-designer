@@ -5,24 +5,15 @@
 
 	<!-- New and Edit elements -->
 	<div class="col-lg-3">
-		<div class="panel-group" id="accordion">
-			<div class="panel panel-default panel-element" ng-repeat="group in getGroups()">
-			  <div class="panel-heading">
-				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{group}}">{{group}}</a>
+		<div class="panel-group" >
+			<div class="panel panel-default panel-element" ng-repeat="group in groups">
+			  <div class="panel-heading" ng-init="open=false">
+				<a ng-click="open = !open" href="">{{group}}</a>
 				</div>
-				  <div id="{{group}}" class="panel-collapse collapse">					  
-						<a class="btn btn-info btn-block template" ng-repeat="template in templates | filter:{ group: group }" element-new value="template">{{value.name}} </a>							
+				 <div id="{{group}}"  ng-show="open">					  
+					<a class="btn btn-info btn-block template" ng-repeat="template in templates | filter:{ group: group }" element-new value="template">{{value.name}} </a>				
 				</div>
 			</div>
-			
-			<div class="panel panel-default">
-			  <div class="panel-heading">Edit element</div>
-				  <div class="panel-body" element-edit >					
-					<div class="please">
-						Drop in element to edit
-					</div>
-				</div>
-			</div>  				
 		</div>
 	</div>
 
@@ -32,38 +23,34 @@
 		<tabset>
 			<tab heading="Design">
 				<div class="editor" >
-					<element value="element" ng-repeat="element in getElements()" />	
+					<element-view-canvas value="getElements()" />	
 				</div>
 			</tab>
 			<tab heading="Frame">
 				<div class="editor" >
-					<element-frame value="getElements()" />
+					<element-view-frame value="getElements()" />
 				</div>
 			</tab>
 			<tab heading="Json">
 				<div >
-					<element-json val="getElements()" />
+					<element-view-json val="getElements()" />
 				</div>
 			</tab>
 			<tab heading="Html">
 				<div >
-					<element-html value="getElements()" />
+					<element-view-html value="getElements()" />
 				</div>
 			</tab>
 			<tab heading="Preview">
-				<div class="editor" >
-					<element-preview value="getElements()" />
+				<div class="editor" ng-controller="stubController">
+					<element-view-preview value="getElements()" />
 				</div>
 			</tab>
-			<tab heading="Controller">
-				<textarea id="controllerText" style="width:100%" rows="20">
-app.controller('previewCtrl', function($scope) {
-$scope.info = function (){
-alert("Test123");
-}
-});							
-				</textarea>
+			<tab heading="Controller" >
+				<div ng-controller="stubController">
+				<textarea id="controllerText" style="width:100%" rows="20" ng-model="source"></textarea>
 				<button class="btn" ng-click="controller()">Save</button>
+				</div>
 			</tab>
 		</tabset>
 	</div>

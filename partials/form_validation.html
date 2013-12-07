@@ -1,1 +1,49 @@
+<form role="form">
 	
+	<!-- Input for ngRequired -->
+	<div class="form-group">
+		<label for="htmlId"><input type="checkbox" ng-model="validation.ngRequired.enable"> Required</label>
+		<input type="text" class="form-control" ng-disabled="!validation.ngRequired.enable" ng-model="validation.ngRequired.message">
+	</div>
+	
+	<!-- Input for ngMinlength -->
+	<div class="form-group">
+		<label for="htmlId"><input type="checkbox" ng-model="validation.ngMinlength.enable"> Minlength</label>
+
+		<div class="row">
+			<div class="col-md-2">
+				<input type="number" class="form-control" ng-disabled="!validation.ngMinlength.enable" ng-model="validation.ngMinlength.value">
+			</div>
+			<div class="col-md-8 col-md-offset-2">
+				<input type="text" class="form-control" ng-disabled="!validation.ngMinlength.enable" ng-model="validation.ngMinlength.message">
+			</div>
+		</div>
+	</div>
+	
+	<!-- Input for ngMaxlength -->
+	<div class="form-group">
+		<label for="htmlId"><input type="checkbox" ng-model="validation.ngMaxlength.enable"> Maxlength</label>
+		<div class="row">
+			<div class="col-md-2">
+				<input type="number" class="form-control" ng-disabled="!validation.ngMaxlength.enable" ng-model="validation.ngMaxlength.value">
+			</div>
+			<div class="col-md-8 col-md-offset-2">
+				<input type="text" class="form-control" ng-disabled="!validation.ngMaxlength.enable" ng-model="validation.ngMaxlength.message">
+			</div>
+		</div>
+	</div>
+	
+	<!-- Input for ngPattern -->
+	<div class="form-group">
+		<label for="htmlId"><input type="checkbox" ng-model="validation.ngPattern.enable"> Pattern</label>
+		<div class="row">
+			<div class="col-md-4">
+				<input type="text" class="form-control" ng-disabled="!validation.ngPattern.enable" ng-model="validation.ngPattern.value">
+			</div>
+			<div class="col-md-8">
+				<input type="text" class="form-control" ng-disabled="!validation.ngPattern.enable" ng-model="validation.ngPattern.message">
+			</div>
+		</div>
+	</div>
+	
+</form>

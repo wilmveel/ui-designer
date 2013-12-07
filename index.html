@@ -24,13 +24,36 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
 		
-		<script type="text/javascript" src="../element-builder/dist/element-builder.js"></script>
+		<script type="text/javascript" src="../element-builder/src/elementModule.js"></script>
+				
+		<script type="text/javascript" src="../element-builder/src/elementController.js"></script>
+		<script type="text/javascript" src="../element-builder/src/elementService.js"></script>
+		
+		<script type="text/javascript" src="../element-builder/src/elementDirective.js"></script>
+		<script type="text/javascript" src="../element-builder/src/elementIncludeDirective.js"></script>
+		<script type="text/javascript" src="../element-builder/src/elementValidateDirective.js"></script>
+
+		<script type="text/javascript" src="../element-builder/src/elementDragDirective.js"></script>
+		<script type="text/javascript" src="../element-builder/src/elementDropDirective.js"></script>
+		
+		<script type="text/javascript" src="../element-builder/src/elementEditDirective.js"></script>
+		<script type="text/javascript" src="../element-builder/src/elementNewDirective.js"></script>
+				
+		<script type="text/javascript" src="../element-builder/src/elementViewCanvasDirective.js"></script>
+		<script type="text/javascript" src="../element-builder/src/elementViewFrameDirective.js"></script>
+		<script type="text/javascript" src="../element-builder/src/elementViewHtmlDirective.js"></script>
+		<script type="text/javascript" src="../element-builder/src/elementViewJsonDirective.js"></script>
+
+		<script type="text/javascript" src="../element-builder/src/elementViewPreviewDirective.js"></script
 		
 		<!-- application -->
 		<script type="text/javascript" src="app/designerApp.js"></script>
-		<script type="text/javascript" src="app/designerController.js"></script>
-		<script type="text/javascript" src="app/designerPreviewController.js"></script>
+		
 		<script type="text/javascript" src="app/designerService.js"></script>
+		<script type="text/javascript" src="app/designerController.js"></script>
+		
+		<script type="text/javascript" src="app/stubService.js"></script>
+		<script type="text/javascript" src="app/stubController.js"></script>
 		
 		<script type="text/javascript" src="app/projectController.js"></script>
 		<script type="text/javascript" src="app/projectService.js"></script>
@@ -58,8 +81,8 @@
 			  
 			  <ul class="nav navbar-nav navbar-right" ng-controller="projectCtrl" >
 				<li><a href="#/projects" ><span class="glyphicon glyphicon-arrow-left"></span> Projects</a></li>
-				<li><a href="#" ng-click="undo()"><span class="glyphicon glyphicon-step-backward"></span> Undo</a></li>
-				<li><a href="#" ng-click="deselect()"><span class="glyphicon glyphicon-unchecked"></span> Deselect</a></li>
+				<li><a href="" ng-click="undo()"><span class="glyphicon glyphicon-step-backward"></span> Undo</a></li>
+				<li><a href="" ng-click="deselect()"><span class="glyphicon glyphicon-unchecked"></span> Deselect</a></li>
 			  </ul>
 			</nav>
 			
