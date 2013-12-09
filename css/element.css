@@ -16,7 +16,7 @@ element-view-frame element .frame{
 	border: solid 1px #333;
 	margin : 5px;
 	padding : 10px;
-	cursor: hand;
+	cursor: pointer;
 	position: relative;
 }
 
@@ -45,11 +45,10 @@ element-view-canvas {
 element-view-canvas element {
 	position: relative;
 	display:block;
-	cursor: move;
 }
 
 element-view-canvas .template {
-	cursor: move;
+
 }
 
 element-view-canvas .drag { 
@@ -60,46 +59,12 @@ element-view-canvas .panel-group .panel-element {
 	overflow:visible;
 }
 
-element-view-canvas .border {
-	position:absolute;
-	width:100%;
-	height:100%;
-	top:0;
-	left:0;
-	border: dashed 2px #CCC;
-	cursor: move;
-}
-
-
-		
-element-view-canvas .plop{
-	position:absolute;
-	top:0px;
-	right:0px;
-	padding: 0px 5px;
-	background-color:#999;
-	color:#CCC;
-	z-index:100;
-}
-
-
-
-element-view-canvas .click {
-	position:absolute;
-	width:100%;
-	height:100%;
-	top:0;
-	left:0;
-}
-
 element-view-canvas .drag-active  {
 		background: #CCC;
-		z-index: 20;
 }
 
 element-view-canvas .drop-active {
 	background:#EEE;
-	z-index: 10
 }
 
 element-view-canvas .please {
@@ -108,20 +73,61 @@ element-view-canvas .please {
 	margin:10px auto;
 	padding:20px;
 	text-align:center;
-	
 }
 
-element-view-canvas .selected {
-	background: #CCC;
-}
-
-
-element-view-canvas .attributes{
+element-view-canvas .drop{
 	position:absolute;
-	z-index: 1;
+}
+
+element-view-canvas .drag{
+	position:absolute;
+	width:100%;
+	height:100%;
 	top:0;
 	left:0;
 }
+
+element-view-canvas .click{
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	cursor: pointer;
+	z-index:2;
+}
+
+element-view-canvas .clicked{
+	z-index:3;
+	cursor: move;
+}
+
+element-view-canvas .drag-active .click{
+	display: none;
+}
+
+element-view-canvas .border {
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:0;
+	left:0;
+	border: dashed 2px #CCC;
+	cursor: move;
+	z-index:1;
+}
+	
+element-view-canvas .plop{
+	position:absolute;
+	top:0px;
+	right:0px;
+	padding: 0px 5px;
+	background-color:#999;
+	color:#CCC;
+	z-index:4;
+}
+
+
 
 /* Validation */
 element-view-preview input.ng-valid{

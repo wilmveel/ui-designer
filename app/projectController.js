@@ -1,6 +1,6 @@
 app.controller('projectCtrl', function($scope, $rootScope, $http, projectService) {
 	
-	$http.get('service/projects_list.php').success(function(data){
+	$http.get('../element-service/projects_list.php').success(function(data){
 		$scope.projects = data;
 	});
 	
@@ -24,5 +24,11 @@ app.controller('projectCtrl', function($scope, $rootScope, $http, projectService
 	$scope.deselect = function (){
 		console.log("deselect all");
 		$rootScope.$broadcast('deselect');
+	}	
+
+	$scope.create = function (){
+		console.log("create project");
+		var name = $scope.name;
+		projectService.create(name);
 	}
 });

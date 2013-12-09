@@ -32,7 +32,10 @@ app.service('designerService', function($http, $q) {
 				"type" : "text",
 				"columns" : 3,
 				"orientation":""
-			}
+			},
+            "angular": {
+              "model": "data.init"
+            },
 		},
 		{
 			"group" : "input",
