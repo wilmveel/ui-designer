@@ -11,7 +11,7 @@
 				<a ng-click="open = !open" href="">{{group}}</a>
 				</div>
 				 <div id="{{group}}"  ng-show="open">					  
-					<a class="btn btn-info btn-block template" ng-repeat="template in templates | filter:{ group: group }" element-new value="template">{{value.name}} </a>				
+					<a class="btn btn-info btn-block template new" ng-repeat="template in templates | filter:{ group: group }" element-new value="template">{{value.name}} </a>				
 				</div>
 			</div>
 		</div>
@@ -46,12 +46,21 @@
 					<element-view-preview value="getElements()" />
 				</div>
 			</tab>
-			<tab heading="Controller" >
+
+			<tab heading="Data Binding">
 				<div ng-controller="stubController">
-				<textarea id="controllerText" style="width:100%" rows="20" ng-model="source"></textarea>
-				<button class="btn" ng-click="controller()">Save</button>
+									
+					<table class="table">
+					<tr ng-repeat="binding in getBindings()">
+						<th width="300">{{binding}}</th>
+						<td>{{getData(binding)}}</td>
+						<td>{{bindings}}</td>
+					</tr>
+					</table>
 				</div>
 			</tab>
+			
+			
 		</tabset>
 	</div>
 

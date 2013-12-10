@@ -7,11 +7,11 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService, proj
 	$scope.element = {};
 	$scope.validation = {};
 	 
-	//get all elements from the service
+	// get all elements from the service
 	$scope.getElements = function (){
 		return elementService.elements;
 	}
-	
+		
 	$scope.groups = new Array();
 	angular.forEach(designerService.templates, function(value, key){
 		if($scope.groups.indexOf(value.group) < 0 && value.group){
@@ -64,9 +64,13 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService, proj
 		console.log("validator", $scope.validation);
 		console.log("element", $scope.element);
 		
-		//set data
+		// set data
 		elementService.element.data = $scope.element.data;
-		elementService.element.angular = $scope.element.angular;
+		
+		// set angular binding varible
+		if($scope.angular.model) elementService.element.attributes.model.ngModel = $scope.angular.model;
+		if($scope.angular.binding) elementService.element.attributes.binding.ngBinding = $scope.angular.binding;
+		if($scope.angular.click) elementService.element.attributes.click.ngClick = $scope.angular.click;
 		
 		// Loop all validation rules
 		console.log("$scope.validation", $scope.validation);
@@ -74,16 +78,18 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService, proj
 		angular.forEach($scope.validation, function(value, key){
 			console.log("validation", key, value);
 			if(value.enable){
-				validation[key] = {};
-				validation[key].value = value.value;
-				validation[key].message = value.message;
+				if(value.value){
+					validation[key] = value.value;
+				}else{
+					validation[key] = true;
+				}
 				
 			}
 		});
-		elementService.element.validation = validation;
+		elementService.element.attributes.validation = validation;
 		$scope.validation = null;
 		
-		//orientation
+		// orientation
 		var temp = elementService.element.template.split("-");
 		if($scope.element.data.orientation && $scope.element.data.orientation != ""){
 			template = temp[0] + "-" + $scope.element.data.orientation; 
@@ -103,12 +109,18 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService, proj
 		elementService.element = element;
 		$scope.element = angular.copy(element);
 		
+		// Populate angular bindings
+		var attributes = $scope.element.attributes
+		$scope.angular = {};
+		if(attributes.model) $scope.angular.model = attributes.model.ngModel;
+		if(attributes.binding) $scope.angular.binding = attributes.binding.ngBinding;
+		if(attributes.click) $scope.angular.click = attributes.click.ngClick;
+		
 		// Populate validations
 		$scope.validation = {};
-		angular.forEach(elementService.element.validation, function(value, key){
+		angular.forEach(elementService.element.attributes.validation, function(value, key){
 			$scope.validation[key] = {};
-			$scope.validation[key].value = value.value;
-			$scope.validation[key].message = value.message;
+			$scope.validation[key].value = value;
 			$scope.validation[key].enable = true;
 		});
 		

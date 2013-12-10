@@ -1,8 +1,8 @@
 <div class="form-group">
 	<label for="{{id}}" class="col-sm-{{data.columns}} control-label">{{data.label}}</label>
 	<div class="col-sm-{{data.columnsInv}}">
-		<input id="{{id}}" name="{{name}}" type="{{data.type}}" class="form-control" placeholder="{{data.placeholder}}" ng-model="angular.model" element-validate />
-		<div class="error" ng-show="text">{{$error}}</div>
+		<input id="{{id}}" name="{{data.name}}" type="{{data.type}}" class="form-control" placeholder="{{data.placeholder}}" element-model element-validation />
+		<div class="error" >{{$error}}</div>
 		<div class="text" ng-show="data.text">{{data.text}}</div>
 	</div>
 </div>

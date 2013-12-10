@@ -128,7 +128,6 @@ element-view-canvas .plop{
 }
 
 
-
 /* Validation */
 element-view-preview input.ng-valid{
 	border: 1px solid #0F0;
@@ -137,4 +136,12 @@ element-view-preview input.ng-valid{
 element-view-preview input.ng-invalid{
 	border: 1px solid #F00;
 	background: #933;
+}
+
+.panel-group .panel-element{
+	overflow: visible;
+}
+
+.panel-group .panel-element .new{
+	z-index:5;
 }
