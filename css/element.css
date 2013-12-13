@@ -94,11 +94,11 @@ element-view-canvas .click{
 	top:0;
 	left:0;
 	cursor: pointer;
-	z-index:2;
+	z-index: 1002;
 }
 
 element-view-canvas .clicked{
-	z-index:3;
+	z-index: 1003;
 	cursor: move;
 }
 
@@ -114,7 +114,7 @@ element-view-canvas .border {
 	left:0;
 	border: dashed 2px #CCC;
 	cursor: move;
-	z-index:1;
+	z-index: 1001;
 }
 	
 element-view-canvas .plop{
@@ -124,7 +124,7 @@ element-view-canvas .plop{
 	padding: 0px 5px;
 	background-color:#999;
 	color:#CCC;
-	z-index:4;
+	z-index: 1004;
 }
 
 
@@ -143,5 +143,5 @@ element-view-preview input.ng-invalid{
 }
 
 .panel-group .panel-element .new{
-	z-index:5;
+	z-index: 1005;
 }

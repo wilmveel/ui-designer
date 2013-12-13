@@ -68,26 +68,31 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService, proj
 		elementService.element.data = $scope.element.data;
 		
 		// set angular binding varible
-		if($scope.angular.model) elementService.element.attributes.model.ngModel = $scope.angular.model;
-		if($scope.angular.binding) elementService.element.attributes.binding.ngBinding = $scope.angular.binding;
-		if($scope.angular.click) elementService.element.attributes.click.ngClick = $scope.angular.click;
+		if($scope.angular){
+			if($scope.angular.model) elementService.element.attributes.model.ngModel = $scope.angular.model;
+			if($scope.angular.binding) elementService.element.attributes.binding.ngBinding = $scope.angular.binding;
+			if($scope.angular.click) elementService.element.attributes.click.ngClick = $scope.angular.click;
+			$scope.angular = null;
+		}
 		
 		// Loop all validation rules
-		console.log("$scope.validation", $scope.validation);
-		var validation = {};
-		angular.forEach($scope.validation, function(value, key){
-			console.log("validation", key, value);
-			if(value.enable){
-				if(value.value){
-					validation[key] = value.value;
-				}else{
-					validation[key] = true;
+		if($scope.validation && elementService.element.attributes){
+			console.log("$scope.validation", $scope.validation);
+			var validation = {};
+			angular.forEach($scope.validation, function(value, key){
+				console.log("validation", key, value);
+				if(value.enable){
+					if(value.value){
+						validation[key] = value.value;
+					}else{
+						validation[key] = true;
+					}
+					
 				}
-				
-			}
-		});
-		elementService.element.attributes.validation = validation;
-		$scope.validation = null;
+			});
+			elementService.element.attributes.validation = validation;
+			$scope.validation = null;
+		}
 		
 		// orientation
 		var temp = elementService.element.template.split("-");
@@ -111,19 +116,20 @@ app.controller('designerCtrl', function($scope, $rootScope, elementService, proj
 		
 		// Populate angular bindings
 		var attributes = $scope.element.attributes
-		$scope.angular = {};
-		if(attributes.model) $scope.angular.model = attributes.model.ngModel;
-		if(attributes.binding) $scope.angular.binding = attributes.binding.ngBinding;
-		if(attributes.click) $scope.angular.click = attributes.click.ngClick;
-		
-		// Populate validations
-		$scope.validation = {};
-		angular.forEach(elementService.element.attributes.validation, function(value, key){
-			$scope.validation[key] = {};
-			$scope.validation[key].value = value;
-			$scope.validation[key].enable = true;
-		});
-		
+		if(attributes){		
+			$scope.angular = {};
+			if(attributes.model) $scope.angular.model = attributes.model.ngModel;
+			if(attributes.binding) $scope.angular.binding = attributes.binding.ngBinding;
+			if(attributes.click) $scope.angular.click = attributes.click.ngClick;
+				
+			// Populate validations
+			$scope.validation = {};
+			angular.forEach(elementService.element.attributes.validation, function(value, key){
+				$scope.validation[key] = {};
+				$scope.validation[key].value = value;
+				$scope.validation[key].enable = true;
+			});
+		}
 		$("#myModal").modal('show');
 	}
 	

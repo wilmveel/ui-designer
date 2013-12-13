@@ -33,9 +33,14 @@ app.service('designerService', function($http, $q) {
 				"columns" : 3,
 				"orientation":""
 			},
-            "angular": {
-              "model": "data.init"
-            },
+            "attributes": {
+              "model": {
+                "ngModel": "data.init"
+              },
+              "validation": {
+                "ngMaxlength": 6
+              }
+            }
 		},
 		{
 			"group" : "input",
@@ -45,7 +50,15 @@ app.service('designerService', function($http, $q) {
 				"label":"Input label",
 				"rows": "3",
 				"orientation":""
-			}
+			},
+            "attributes": {
+                "model": {
+                  "ngModel": "data.init"
+                },
+                "validation": {
+                  "ngMaxlength": 6
+                }
+              }
 		},
 		{
 			"group" : "input",
@@ -55,7 +68,15 @@ app.service('designerService', function($http, $q) {
 				"label":"Input label",
 				"placeholder": "Input placeholder",
 				"orientation":""
-			}
+			},
+            "attributes": {
+                "model": {
+                  "ngModel": "data.init"
+                },
+                "validation": {
+                  "required": true
+                }
+             }
 		},
 		{
 			"group" : "input",
@@ -65,7 +86,15 @@ app.service('designerService', function($http, $q) {
 				"text":"I agree ...",
 				"columns" : 3,
 				"orientation":""
-			}
+			},
+            "attributes": {
+                "model": {
+                  "ngModel": "data.init"
+                },
+                "validation": {
+                  "required": true
+                }
+            }
 		},
 		{
 			"group" : "input",
@@ -80,7 +109,12 @@ app.service('designerService', function($http, $q) {
 				"block" : 0,
 				"orientation":"",
 				"columns" : 3
-			}
+			},
+            "attributes": {
+                "click": {
+                  "ngClick": "send()"
+                }
+            }
 		},
 		{
 			"group" : "panel",
@@ -99,7 +133,10 @@ app.service('designerService', function($http, $q) {
 		{
 			"group" : "tab",
 			"name" : "Tab",
-			"template":"tab"
+			"template":"tab",
+			"data" : {
+				"title" : "Heading"
+			}
 		},
 		
 		{

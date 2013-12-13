@@ -1,8 +1,8 @@
 app.controller('stubController', function($scope, stubService, elementService) {
-   	
+   		
 	$scope.source = stubService.source;
 		
-	$scope.test = function(){
+	$scope.send = function(){
 		console.log("Send data to server", stubService.data);
 	}
 	
@@ -31,18 +31,28 @@ app.controller('stubController', function($scope, stubService, elementService) {
 	}
 	
 	// get all elements from the service
-	$scope.getBindings = function(){
-		return stubService.bindings;
+	$scope.getAngular = function(){
+		return stubService.angular;
 	};
 	
-	$scope.$watch("elementService.elements", function(){
-		stubService.bindings = [];
+	// get all elements from the service
+	$scope.getElements = function(){
+		return elementService.elements;
+	};
+		
+	// Open model for edit after drop element	
+	$scope.$watch("getElements()", function(){
+		console.log("Reload bindings");
+		stubService.angular={};
+		stubService.angular.model = [];
+		stubService.angular.binding = [];
+		stubService.angular.click = [];
 		elementService.elements.forEach(function(element){
 			findBinding(element);
 		});
 		
 		// Listen to vallue change of binding data
-		stubService.bindings.forEach(function(input){
+		stubService.angular.model.forEach(function(input){
 			var root = input.split(".")[0];
 			$scope.$watch(input,function(){
 				stubService.data[root] = $scope[root];
@@ -56,8 +66,14 @@ app.controller('stubController', function($scope, stubService, elementService) {
 			element.elements.forEach(function(element){
 				findBinding(element);
 				if(element.attributes && element.attributes.model){
-					stubService.bindings.push(element.attributes.model.ngModel);
-				}				
+					stubService.angular.model.push(element.attributes.model.ngModel);
+				}		
+				if(element.attributes && element.attributes.click){
+					stubService.angular.click.push(element.attributes.click.ngClick);
+				}		
+				if(element.attributes && element.attributes.binding){
+					stubService.angular.binding.push(element.attributes.binding.ngBinding);
+				}		
 			});
 		}
 	}

@@ -47,16 +47,44 @@
 				</div>
 			</tab>
 
-			<tab heading="Data Binding">
+			<tab heading="Angular">
 				<div ng-controller="stubController">
-									
-					<table class="table">
-					<tr ng-repeat="binding in getBindings()">
-						<th width="300">{{binding}}</th>
-						<td>{{getData(binding)}}</td>
-						<td>{{bindings}}</td>
-					</tr>
-					</table>
+				
+
+					<div class="panel panel-default">
+					  	<div class="panel-heading">ngModel</div>
+					    <div class="panel-body">		
+							<table class="table">
+								<tr ng-repeat="model in getAngular().model">
+									<th width="300">{{model}}</th>
+									<td>{{getData(model)}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					
+					<div class="panel panel-default">
+					  	<div class="panel-heading">ngClick</div>
+					    <div class="panel-body">		
+							<table class="table">
+								<tr ng-repeat="click in getAngular().click">
+									<th width="300">{{click}}</th>
+								</tr>
+							</table>
+						</div>
+					</div>
+					
+					<div class="panel panel-default">
+					  	<div class="panel-heading">ngBinding</div>
+					    <div class="panel-body">		
+							<table class="table">
+								<tr ng-repeat="binding in getAngular().binding">
+									<th width="300">{{binding}}</th>
+								</tr>
+							</table>
+						</div>
+					</div>
+					
 				</div>
 			</tab>
 			
